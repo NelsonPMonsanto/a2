@@ -41,12 +41,7 @@ public class InitData implements CommandLineRunner {
         userRepo.save(new User("John", "Smith", nutritionist));
         
 
-        Integer nItems = Integer.parseInt(args[0]);
-        for (int i = 0; i < nItems; i++) {
-            entity1Repository.save(new Entity1("Entity1 " + i));
-            System.out.println("---- Created Entity");
-
-        }
+        System.out.println("---- Created Users");
     }
 
 }

@@ -4,7 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -18,9 +21,14 @@ public class User {
 
     String firstName;
     String lastName;
+
+
+
+    @ManyToOne
+    @JoinColumn(name="fkey_dept")
     Department department;
 
-
+    
 
     public User( String firstName, String lastName, Department department) {
         System.out.println("Creating " + firstName + " " + lastName + " " + department);
