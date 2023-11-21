@@ -3,45 +3,49 @@ package comp31.a2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import comp31.a2.model.entities.Department;
-import comp31.a2.model.entities.Entity1;
-import comp31.a2.model.entities.User;
-import comp31.a2.model.repositories.DepartmentRepo;
-import comp31.a2.model.repositories.Entity1Repository;
-import comp31.a2.model.repositories.UserRepo;
+import comp31.a2.model.entities.Trainee;
+import comp31.a2.model.entities.Trainer;
+import comp31.a2.model.entities.UserEntity;
+import comp31.a2.model.repositories.NutritionistRepo;
+import comp31.a2.model.repositories.TraineeRepo;
+import comp31.a2.model.repositories.TrainerRepo;
+import comp31.a2.model.repositories.UserEntityRepo;
+
 
 @Component
 public class InitData implements CommandLineRunner {
 
-    Entity1Repository entity1Repository;
-    DepartmentRepo departmentRepo;
-    UserRepo userRepo;
+    UserEntityRepo userRepo;
+    TrainerRepo trainerRepo;
+    NutritionistRepo nutritionistRepo;
+    TraineeRepo traineeRepo;
 
-    public InitData(Entity1Repository entity1Repository, DepartmentRepo departmentRepo, UserRepo userRepo) {
-        this.entity1Repository = entity1Repository;
-        this.departmentRepo = departmentRepo;
+    public InitData(TrainerRepo trainerRepo, NutritionistRepo nutritionistRepo, TraineeRepo traineeRepo,UserEntityRepo userRepo) {
         this.userRepo = userRepo;
+        this.trainerRepo = trainerRepo;
+        this.nutritionistRepo = nutritionistRepo;
+        this.traineeRepo = traineeRepo;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        Department trainer = new Department("Trainer");
-        Department trainee = new Department("Trainee");
-        Department nutritionist = new Department("Nutritionist");
+        UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", true, false, false);
+        // UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", false,null, false,null, true,null);
+        userRepo.save(userEntity1);
 
-        departmentRepo.save(trainer);
-        departmentRepo.save(trainee);
-        departmentRepo.save(nutritionist);
+        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", false, true, false);
+        userRepo.save(userEntity2);
 
-        System.out.println("---- Created Departments");
+        Trainer trainer1 = new Trainer(userEntity1);
+        trainerRepo.save(trainer1);
 
-        userRepo.save(new User("John", "Doe", trainee));
-        userRepo.save(new User("Jane", "Doe", trainer));
-        userRepo.save(new User("John", "Smith", nutritionist));
-        
+        Trainee trainee = new Trainee(null,trainer1,userEntity2);
+        traineeRepo.save(trainee);    
 
-        System.out.println("---- Created Users");
+        // traineeRepo.save(new Trainee("felix","Felix","Roger","qwer2",null,trainer1));
+
+
     }
 
 }
