@@ -31,9 +31,9 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", true, false, false);
-        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", false, true, false);
-        UserEntity userEntity3 = new UserEntity("raul", "Paul", "Danmation", "qwer3", false, false, true);
+        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", 0);
+        UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", 1);
+        UserEntity userEntity3 = new UserEntity("raul", "Saul", "Danmation", "qwer3", 2);
 
         userRepo.save(userEntity1);
         userRepo.save(userEntity2);

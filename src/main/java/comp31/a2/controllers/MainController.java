@@ -34,6 +34,7 @@ public class MainController {
     public String showAllUsers(Model model) {
 
         List<UserEntity> users = userService.findAllUsers();
+        // List<UserEntity> users = userService.findUsersByFirstName("Pablo");
         // logger.info("here", users.size());
         model.addAttribute("users", users);
         
