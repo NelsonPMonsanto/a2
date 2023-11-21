@@ -9,4 +9,7 @@ import comp31.a2.model.entities.UserEntity;
 public interface UserEntityRepo extends CrudRepository<UserEntity,Integer>{
     
     public List<UserEntity> findAll();
+
+    public List<UserEntity> findByFirstName(String Name);
+
 }
