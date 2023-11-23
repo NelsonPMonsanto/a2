@@ -29,7 +29,7 @@ public class Trainer {
     @OneToMany(mappedBy = "trainer")
     List<Trainee> trainees;
     @OneToOne()
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "trr_user_id")
     UserEntity user_trainer;
 
 

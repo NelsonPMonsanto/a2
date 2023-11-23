@@ -15,39 +15,46 @@ import comp31.a2.model.repositories.UserEntityRepo;
 @Service
 public class UserService {
     
-    UserEntityRepo userRepo;
-    TrainerRepo trainerRepo;
-    TraineeRepo traineeRepo;
-    NutritionistRepo nutritionistRepo;
-    
-    public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,UserEntityRepo userRepo) {
-        this.userRepo = userRepo;
-        this.trainerRepo = trainerRepo;
-        this.traineeRepo = traineeRepo;
-        this.nutritionistRepo = nutritionistRepo;
-    }
-    public List<Nutritionist> findAllNutritionist()
-    {
-       return nutritionistRepo.findAll();
-    }
+   UserEntityRepo userRepo;
+   TrainerRepo trainerRepo;
+   TraineeRepo traineeRepo;
+   NutritionistRepo nutritionistRepo;
+   
+   public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,UserEntityRepo userRepo) {
+      this.userRepo = userRepo;
+      this.trainerRepo = trainerRepo;
+      this.traineeRepo = traineeRepo;
+      this.nutritionistRepo = nutritionistRepo;
+   }
+   public List<Nutritionist> findAllNutritionist()
+   {
+      return nutritionistRepo.findAll();
+   }
 
-    public List<Trainer> findAllTrainers()
-    {
-       return trainerRepo.findAll();
-    }
+   public List<Trainer> findAllTrainers()
+   {
+      return trainerRepo.findAll();
+   }
 
-    public List<Trainee> findAllTrainees()
-    {
-       return traineeRepo.findAll();
-    }
-    
-    public List<UserEntity> findAllUsers()
-    {
-       return userRepo.findAll();
-    }
+   public List<Trainee> findAllTrainees()
+   {
+      return traineeRepo.findAll();
+   }
+   
+   public List<UserEntity> findAllUsers()
+   {
+      return userRepo.findAll();
+   }
 
-    public List<UserEntity> findUsersByFirstName(String name)
-    {
-       return userRepo.findByFirstName(name);
-    }
+   public List<UserEntity> findUsersByFirstName(String name)
+   {
+      return userRepo.findByFirstName(name);
+   }
+
+   public List<UserEntity> findUsersByUserType(Integer type)
+   {
+      return userRepo.findByUserType(type);
+   }
+
+
 }
