@@ -2,6 +2,7 @@ package comp31.a2.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import comp31.a2.model.entities.Nutritionist;
 import comp31.a2.model.entities.Trainee;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 public class MainController {
 
     UserService userService;
+    TraineeRepo traineeRepo;
     // Logger logger = LoggerFactory.getLogger(MainController.class);
 
     public MainController(UserService userService) {
@@ -37,6 +39,10 @@ public class MainController {
         // List<UserEntity> users = userService.findUsersByFirstName("Pablo");
         // logger.info("here", users.size());
         model.addAttribute("users", users);
+        List<Trainer> trainers = userService.findAllTrainers();
+        model.addAttribute("trainers", trainers);
+        List<Nutritionist> nutritionists = userService.findAllNutritionist();
+        model.addAttribute("nutritionists", nutritionists);
         
         return "showAllUsers";
     }
@@ -77,4 +83,17 @@ public class MainController {
         
         return "findUsersByFirstName";
     }
+    @GetMapping("/usecase6")
+    public String createAccount(Model model) {
+
+        return "createAccount";
+    }
+    @PostMapping("/usecase6")
+    public String assignMentors(){
+        UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
+        Trainee trainee7 = new Trainee(null,null,userEntity17);
+        traineeRepo.save(trainee7);
+        return "createAccount";
+    }
+
 }

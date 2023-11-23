@@ -50,4 +50,7 @@ public class UserService {
     {
        return userRepo.findByFirstName(name);
     }
+    public List<Trainee> findTraineesByNutritionist(Nutritionist nutritionist) {
+        return null;
+    }
 }
