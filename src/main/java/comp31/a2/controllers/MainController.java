@@ -8,6 +8,7 @@ import comp31.a2.model.entities.Nutritionist;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
 import comp31.a2.model.entities.UserEntity;
+import comp31.a2.model.repositories.TraineeRepo;
 import comp31.a2.services.UserService;
 
 import java.util.List;

@@ -37,12 +37,5 @@ public class Trainer {
         this.user_trainer = user_trainer;
     }
 
-    // public Trainer(String username, String firstName, String lastName, String password) {
-    //     this.username = username;
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.password = password;
-    // }
-
 
 }

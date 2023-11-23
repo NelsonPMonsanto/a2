@@ -39,7 +39,7 @@ public class InitData implements CommandLineRunner {
         UserEntity userEntity12 = new UserEntity("william", "William", "Jones", "qwer12", 0);
         UserEntity userEntity13 = new UserEntity("ava", "Ava", "Miller", "qwer13", 0);
         UserEntity userEntity16 = new UserEntity("ethan", "Ethan", "Lopez", "qwer16", 0);
-        UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
+        // UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
         //trainers
         UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", 1);
         UserEntity userEntity4 = new UserEntity("john", "John", "Doe", "qwer4", 1);
