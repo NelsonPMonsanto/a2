@@ -4,12 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -31,6 +28,8 @@ public class NutritionPlan {
     @OneToOne()
     @JoinColumn(name = "fk_trainee")
     Trainee trainee_nutri_plan;
+
+    Integer traineeId;
 
     public NutritionPlan(String goal, String foodToAvoid, String foodToPriotize,Integer caloriesIntake,Integer litersOfWaterTaken, Trainee trainee_nutri_plan) {
         this.goal = goal;

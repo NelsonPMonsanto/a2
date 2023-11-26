@@ -44,5 +44,10 @@ public class Trainer {
     //     this.password = password;
     // }
 
+    public List<Trainee> getTrainees()
+    {
+        return this.trainees;
+    }
+
 
 }

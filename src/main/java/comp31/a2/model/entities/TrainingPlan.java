@@ -29,6 +29,8 @@ public class TrainingPlan {
     @JoinColumn(name = "fk_trainee")
     Trainee trainee_train_plan;
 
+    Integer traineeId;
+
     public TrainingPlan(String goal, String musclePriority, String excercisetoavoid,Integer weight,Integer trainingHours, Trainee trainee_train_plan) {
         this.goal = goal;
         this.musclePriority = musclePriority;

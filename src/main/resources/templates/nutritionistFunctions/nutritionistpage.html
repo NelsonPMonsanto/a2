@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritionist page</title>
+</head>
+<body>
+    <h1>Nutritionist Page</h1>
+    <h2 th:text="'Welcome ' + ${currentuser.username} +'. Your are now Log in'"></h2>
+    
+    <button><a href="/createnutritionplan">Create nutrition plan</a></button>
+    <button><a href="/updatenutritionplan">Update nutrition plan</a></button>
+    <button><a href="/checkstatsoftrainee">Check stats of trainees</a></button>
+
+</body>
+</html>
