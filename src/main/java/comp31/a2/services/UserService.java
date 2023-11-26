@@ -53,18 +53,18 @@ public class UserService {
       return null;
    }
 
-   // private Trainer findTrainerWithLeastTrainees(List<Trainer> trainers) {
-   //    Trainer trainerWithLeastTrainees = null;
-   //    int minTrainees = Integer.MAX_VALUE;
+   public Trainer findTrainerWithLeastTrainees(List<Trainer> trainers) {
+      Trainer trainerWithLeastTrainees = null;
+      int minTrainees = Integer.MAX_VALUE;
 
-   //    for (Trainer trainer : trainers) {
-   //       int traineeCount = trainer.getTrainees().size();
-   //       if (traineeCount < minTrainees) {
-   //          minTrainees = traineeCount;
-   //          trainerWithLeastTrainees = trainer;
-   //       }
-   //    }
+      for (Trainer trainer : trainers) {
+         int traineeCount = trainer.getTrainees().size();
+         if (traineeCount < minTrainees) {
+            minTrainees = traineeCount;
+            trainerWithLeastTrainees = trainer;
+         }
+      }
 
-   //    return trainerWithLeastTrainees;
-   // }
+      return trainerWithLeastTrainees;
+   }
 }

@@ -9,4 +9,5 @@ import comp31.a2.model.entities.Trainer;
 public interface TrainerRepo extends CrudRepository<Trainer,Integer> {
     
     public List<Trainer> findAll();
+    //public Trainer findTrainerWithLeastTrainees(List<Trainer> trainers);
 }
