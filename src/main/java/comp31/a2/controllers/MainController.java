@@ -28,67 +28,38 @@ public class MainController {
     Logger logger = LoggerFactory.getLogger(MainController.class);
     UserEntity currentUser;
 
-
     public MainController(UserService userService) {
         this.userService = userService;
     }
 
-    // @GetMapping("/")
-    // public String getRoot()
-    // {
-    //     return "index";
-    // }
-
-    // Trainee page
     @GetMapping("/")
     public String getRoot(Model model)
     {
+        String returnpage = "";
         if(currentUser == null)
         {
-            List<UserEntity> traineeList = userService.findUsersByUserType(0);
-            Integer listrange = traineeList.size();
+            List<UserEntity> userList = userService.findAllUsers();
+            Integer listrange = userList.size();
             Random rand = new Random(); 
             Integer upperbound = listrange;
             int int_random = rand.nextInt(upperbound);
-            currentUser = traineeList.get(int_random);
+            currentUser = userList.get(int_random);
         }
+        
+        switch (currentUser.getUserType()) {
+            case 0:
+                returnpage = "traineepage";
+            break;
+            case 1:
+                returnpage = "trainerFunctions/trainerpage" ;
+            break;
+            default:
+                returnpage = "nutritionistFunctions/nutritionistpage";
+            break;
+        }    
         model.addAttribute("currentuser", currentUser);
-        return "traineepage";
+        return returnpage;
     }
-
-    // Nutrition page
-    // @GetMapping("/")
-    // public String getRoot(Model model)
-    // {
-    //     if(currentUser == null)
-    //     {
-    //         List<UserEntity> nutritionistList = userService.findUsersByUserType(2);
-    //         Integer listrange = nutritionistList.size();
-    //         Random rand = new Random(); 
-    //         Integer upperbound = listrange;
-    //         int int_random = rand.nextInt(upperbound);
-    //         currentUser = nutritionistList.get(2);
-    //     }
-    //     model.addAttribute("currentuser", currentUser);
-    //     return "nutritionistFunctions/nutritionistpage";
-    // }
-
-    // Training page
-    // @GetMapping("/")
-    // public String getRoot(Model model)
-    // {
-    //     if(currentUser == null)
-    //     {
-    //         List<UserEntity> listoftrainer = userService.findUsersByUserType(1);
-    //         Integer listrange = listoftrainer.size();
-    //         Random rand = new Random(); 
-    //         Integer upperbound = listrange;
-    //         int int_random = rand.nextInt(upperbound);
-    //         currentUser = listoftrainer.get(2);
-    //     }
-    //     model.addAttribute("currentuser", currentUser);
-    //     return "trainerFunctions/trainerpage";
-    // }
 
     @GetMapping("/createnutritionplan")
     public String createNutritionPlan(Model model)
@@ -147,7 +118,6 @@ public class MainController {
         model.addAttribute("currentuser", currentUser);
         return "trainerFunctions/trainerpage";
     }
-
     @GetMapping("/checkstatsoftrainee")
     public String checktraineestats(Model model)
     {  
@@ -158,7 +128,6 @@ public class MainController {
         Nutritionist nutritionist = new Nutritionist();
         List<Trainee> traineeList = new ArrayList<Trainee>();
         boolean show = false;
-
         switch (userType) {
             case 1:
                 trainer = currentUser.getTrainer();
@@ -217,50 +186,4 @@ public class MainController {
         model.addAttribute("title", pageTitle);
         return "showtraineesstats";
     }
-
-    @GetMapping("/usecase1")
-    public String showAllUsers(Model model) {
-        List<UserEntity> users = userService.findAllUsers();
-        model.addAttribute("users", users);    
-        return "examples/showAllUsers";
-    }
-
-    @GetMapping("/usecase2")
-    public String showAllTrainers(Model model) {
-
-        List<Trainer> trainers = userService.findAllTrainers();
-        model.addAttribute("trainers", trainers);
-        
-        return "examples/showAllTrainers";
-    }
-    
-    @GetMapping("/usecase3")
-    public String showAllNutritionist(Model model) {
-
-        List<Nutritionist> nutritionists = userService.findAllNutritionist();
-        model.addAttribute("nutritionists", nutritionists);
-        return "examples/showAllNutritionist";
-    }
-
-    @GetMapping("/usecase4")
-    public String showAllTrainees(Model model) {
-
-        List<Trainee> trainees = userService.findAllTrainees();
-        model.addAttribute("trainees", trainees);
-        
-        return "examples/showAllTrainees";
-    }
-
-    @GetMapping("/usecase5")
-    public String findUsersByFirstName(Model model) {
-
-        UserEntity users = userService.findByFirstName("Paul");
-
-        model.addAttribute("users", users);
-        return "examples/findUsersByFirstName";
-    }
-
-
-
-
 }
