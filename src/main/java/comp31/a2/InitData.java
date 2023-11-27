@@ -94,7 +94,6 @@ public class InitData implements CommandLineRunner {
         Nutritionist nutritionist5 = new Nutritionist(userEntity15);
         nutritionistRepo.save(nutritionist5);
 
-
         //Trainees
         Trainee trainee1 = new Trainee(nutritionist1,trainer1,userEntity2);
         traineeRepo.save(trainee1);    
@@ -108,23 +107,6 @@ public class InitData implements CommandLineRunner {
         traineeRepo.save(trainee5);
         Trainee trainee6 = new Trainee(nutritionist5,trainer5,userEntity16);
         traineeRepo.save(trainee6);
-        // Trainee trainee7 = new Trainee(null,null,userEntity17);
-        // traineeRepo.save(trainee7);
-        
-        // UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
-        // userRepo.save(userEntity17);
-        // Trainee trainee7 = new Trainee(null, null, userEntity17);
-        // traineeRepo.save(trainee7);
-
-
-
-
-
-
-        // traineeRepo.save(new Trainee("felix","Felix","Roger","qwer2",null,trainer1));
-
-
-
     }
 
 }
