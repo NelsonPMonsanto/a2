@@ -40,4 +40,13 @@ public class UserService {
     {
        return userRepo.findAll();
     }
+
+    public List<Trainer> findAvailableTrainers() //NOV26
+    {
+      return trainerRepo.findByIsAvailableTrue();
+    }
+
+    public UserEntity getCurrentUser() {
+      return userRepo.findAll().get(0);
+    }  
 }

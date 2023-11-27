@@ -9,4 +9,6 @@ import comp31.a2.model.entities.Trainer;
 public interface TrainerRepo extends CrudRepository<Trainer,Integer> {
     
     public List<Trainer> findAll();
+    public List<Trainer> findByIsAvailableTrue(); //NOV26 JOEL
 }
+
