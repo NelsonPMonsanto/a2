@@ -50,4 +50,29 @@ public class UserService {
     {
        return userRepo.findByFirstName(name);
     }
+
+    public void saveUser( UserEntity userEntity)
+    {
+        userRepo.save(userEntity);
+    }
+
+    public void saveTrainer(Trainer trainer)
+    {
+        trainerRepo.save(trainer);
+    }
+     public void saveTrainee(Trainee trainee)
+    {
+        traineeRepo.save(trainee);
+    }
+      public void saveNutritionist(Nutritionist nutritionist)
+    {
+        nutritionistRepo.save(nutritionist);
+    }
+
+    public UserEntity findByUsername (String username)
+    {
+        return userRepo.findByUsername(username);
+    }
+
+
 }

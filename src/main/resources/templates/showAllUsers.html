@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}">
 </head>
 <body>
     <table>
@@ -26,19 +27,17 @@
                 <span th:case="2">Nutritionalist</span> 
             </span>
             </td>
-            <td th:if="${user.userType == 0}">
-                <!-- <span th:text="${user.trainee.id}"></span> -->
-                <span th:text="${user.trainee.trainer.user_trainer.firstName}"></span>
-            </td>
+
             <td th:if="${user.userType == 1}">
                 <span th:text="${user.trainer.id}"></span>
             </td>
-            <td th:if="${user.userType == 2}">
-                <span th:text="${user.nutritionist.id}"></span>
-            </td>
+           
         </tr>
-    </table>
 
+    </table>
+    <br>
     <button><a href="/">Home</a></button>
+    </br>
+
 </body>
 </html>
