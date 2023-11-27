@@ -18,17 +18,17 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 public class MainController {
-
+UserService userService;
     @GetMapping("/uc1")
     public String getUseCase1(Model model) {
 
-        List<Trainer> trainers = UserService.findAllTrainers();
+        List<Trainer> trainers = userService.findAllTrainers();
         model.addAttribute("trainers", trainers);
 
-        List<Trainee> trainees = UserService.findAllTrainees();
+        List<Trainee> trainees = userService.findAllTrainees();
         model.addAttribute("trainees", trainees);
 
-        List<UserEntity> users = UserService.findAllUsers();
+        List<UserEntity> users = userService.findAllUsers();
         // logger.info("here", users.size());
         model.addAttribute("users", users);
         

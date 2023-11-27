@@ -26,13 +26,12 @@ public class UserService {
         this.nutritionistRepo = nutritionistRepo;
     }
 
-    public List<Trainer> findAllTrainers()
+    public  List<Trainer> findAllTrainers()
     {
        return trainerRepo.findAll();
     }
 
-    public List<Trainee> findAllTrainees()
-    {
+    public List<Trainee> findAllTrainees()    {
        return traineeRepo.findAll();
     }
     
