@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import comp31.a2.model.entities.Nutritionist;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
 import comp31.a2.model.entities.UserEntity;
@@ -25,6 +26,10 @@ public class UserService {
         this.traineeRepo = traineeRepo;
         this.nutritionistRepo = nutritionistRepo;
     }
+    public List<Nutritionist> findAllNutritionist()
+    {
+       return nutritionistRepo.findAll();
+    }
 
     public  List<Trainer> findAllTrainers()
     {
@@ -38,5 +43,10 @@ public class UserService {
     public List<UserEntity> findAllUsers()
     {
        return userRepo.findAll();
+    }
+
+    public List<UserEntity> findUsersByFirstName(String name)
+    {
+       return userRepo.findByFirstName(name);
     }
 }

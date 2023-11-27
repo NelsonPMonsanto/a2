@@ -3,6 +3,7 @@ package comp31.a2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import comp31.a2.model.entities.Nutritionist;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
 import comp31.a2.model.entities.UserEntity;
@@ -30,20 +31,25 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", true, false, false);
-        // UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", false,null, false,null, true,null);
-        userRepo.save(userEntity1);
+        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", 0);
+        UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", 1);
+        UserEntity userEntity3 = new UserEntity("raul", "Saul", "Danmation", "qwer3", 2);
 
-        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", false, true, false);
+        userRepo.save(userEntity1);
         userRepo.save(userEntity2);
+        userRepo.save(userEntity3);
 
         Trainer trainer1 = new Trainer(userEntity1);
         trainerRepo.save(trainer1);
 
-        Trainee trainee = new Trainee(null,trainer1,userEntity2);
+        Nutritionist nutritionist1 = new Nutritionist(userEntity3);
+        nutritionistRepo.save(nutritionist1);
+
+        Trainee trainee = new Trainee(nutritionist1,trainer1,userEntity2);
         traineeRepo.save(trainee);    
 
         // traineeRepo.save(new Trainee("felix","Felix","Roger","qwer2",null,trainer1));
+
 
 
     }
