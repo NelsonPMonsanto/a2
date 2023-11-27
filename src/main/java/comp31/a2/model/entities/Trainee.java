@@ -33,8 +33,7 @@ public class Trainee {
     @OneToOne()
     @JoinColumn(name = "user_id")
     UserEntity user_trainee;
-    @OneToOne()
-    @JoinColumn(name = "trainee_session")
+    @OneToOne(mappedBy = "trainee_session")
     NewTrainingSession newTrainingSession;
 
     public Trainee(Nutritionist nutritionist, Trainer trainer, UserEntity user_trainee) {

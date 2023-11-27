@@ -19,20 +19,20 @@ public class NewTrainingSession {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    Integer id;
 
     @OneToOne
     @JoinColumn(name="trainee_id")
-    private Trainee trainee_session;
+    Trainee trainee_session;
 
     @OneToOne
     @JoinColumn(name="trainer_id")
-    private Trainer trainer_session;
+    Trainer trainer_session;
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String feedback;
-    private String evaluation;
+    LocalDateTime startTime;
+    LocalDateTime endTime;
+    String feedback;
+    String evaluation;
 
     public NewTrainingSession(Trainee trainee, Trainer trainer, LocalDateTime startTime, LocalDateTime endTime) {
         this.trainee_session = trainee;

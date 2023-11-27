@@ -49,7 +49,7 @@ public class UserService {
     
     public List<UserEntity> findAllUsers()
     {
-       return userRepo.findAll();
+      return userRepo.findAll();
     }
 
     public List<UserEntity> findUsersByFirstName(String name)
@@ -67,7 +67,6 @@ public class UserService {
       List<UserEntity> users = userRepo.findAll();
       // ;
       for (UserEntity user : users) {
-         System. out. println(user);
          if (user.getId() == id)
          {
             return user;
