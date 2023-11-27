@@ -34,7 +34,9 @@ public class Trainer {
     UserEntity user_trainer;
     @Column(name = "is_available") //NOV26
     Boolean isAvailable; //NOV26
-
+    @OneToOne()
+    @JoinColumn(name = "trainer_session")
+    NewTrainingSession newTrainingSession;
 
     public Trainer(UserEntity user_trainer, Boolean isAvailable) {
         this.user_trainer = user_trainer;

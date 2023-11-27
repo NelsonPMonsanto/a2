@@ -21,13 +21,13 @@ public class NewTrainingSession {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="trainee_id")
-    private Trainee trainee;
+    private Trainee trainee_session;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="trainer_id")
-    private Trainer trainer;
+    private Trainer trainer_session;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -35,8 +35,8 @@ public class NewTrainingSession {
     private String evaluation;
 
     public NewTrainingSession(Trainee trainee, Trainer trainer, LocalDateTime startTime, LocalDateTime endTime) {
-        this.trainee = trainee;
-        this.trainer = trainer;
+        this.trainee_session = trainee;
+        this.trainer_session = trainer;
         this.startTime = startTime;
         this.endTime = endTime;
     }  

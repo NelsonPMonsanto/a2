@@ -33,12 +33,17 @@ public class Trainee {
     @OneToOne()
     @JoinColumn(name = "user_id")
     UserEntity user_trainee;
+    @OneToOne()
+    @JoinColumn(name = "trainee_session")
+    NewTrainingSession newTrainingSession;
 
     public Trainee(Nutritionist nutritionist, Trainer trainer, UserEntity user_trainee) {
         this.user_trainee = user_trainee;
         this.nutritionist = nutritionist;
         this.trainer = trainer;
     }
+
+    
 
     // public Trainee(String username, String firstName, String lastName, String password, Nutritionist nutritionist,
     //         Trainer trainer) {

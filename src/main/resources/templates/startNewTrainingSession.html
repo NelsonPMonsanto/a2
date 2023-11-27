@@ -9,12 +9,14 @@
     <h1>Start New Training Session</h1>
 
     <!-- Form for requesting a new training session -->
-    <form action=""  th:object="${newTrainingSession}" method="post">
+    <form action="/startNewTrainingSession" method="post">
+        <div th:object="${newTrainingSession}"> 
         <label for="startTime">Start Time:</label><br>
         <input type="datetime-local" id="startTime" name="startTime" th:field="*{startTime}"><br>
         <label for="endTime">End Time:</label><br>
         <input type="datetime-local" id="endTime" name="endTime" th:field="*{endTime}"><br>
-        <input type="submit" value="Request Training Session">
+    </div>
+        <input type="submit" value="Request Training Session"> 
     </form>
 
     <!-- Table for displaying the details of the training session -->

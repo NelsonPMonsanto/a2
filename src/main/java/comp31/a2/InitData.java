@@ -40,16 +40,16 @@ public class InitData implements CommandLineRunner {
         UserEntity userEntity11 = new UserEntity("isabella", "Isabella", "Lee", "qwer11", 1);
         UserEntity userEntity14 = new UserEntity("ethan", "Ethan", "Gonzalez", "qwer14", 1);
         userRepo.save(userEntity1);
+        userRepo.save(userEntity5);
+        userRepo.save(userEntity8);
+        userRepo.save(userEntity11);
+        userRepo.save(userEntity14);
 
-        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", false, true, false);
-        userRepo.save(userEntity2);
-        userRepo.save(userEntity3);
-
-        Trainer trainer1 = new Trainer(userEntity1);
-        Trainer trainer2 = new Trainer(userEntity5);
-        Trainer trainer3 = new Trainer(userEntity8);
-        Trainer trainer4 = new Trainer(userEntity11);
-        Trainer trainer5 = new Trainer(userEntity14);
+        Trainer trainer1 = new Trainer(userEntity1, true);
+        Trainer trainer2 = new Trainer(userEntity5, false);
+        Trainer trainer3 = new Trainer(userEntity8, true);
+        Trainer trainer4 = new Trainer(userEntity11, false);
+        Trainer trainer5 = new Trainer(userEntity14, true);
         trainerRepo.save(trainer1);
         trainerRepo.save(trainer2);
         trainerRepo.save(trainer3);
@@ -110,7 +110,6 @@ public class InitData implements CommandLineRunner {
         traineeRepo.save(trainee5);  
         traineeRepo.save(trainee6);  
         traineeRepo.save(trainee7);  
-         
         
        /*  NewTrainingSession newTrainingSession = new NewTrainingSession(trainee, trainer1, LocalDateTime.now(),
         LocalDateTime.now().plusHours(1));
