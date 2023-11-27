@@ -6,7 +6,7 @@
     <title>Create Nutrition plan</title>
 </head>
 <body>
-    <h1>Trainer Page</h1>
+    <h1>Nutritionist page</h1>
     <h2 th:text="${currentuser.username}"></h2>
 
     <h2>Create nutrition plan</h2>
@@ -32,10 +32,7 @@
                 <input type="text" name="foodToAvoid" th:field="*{foodToAvoid}">
             </div>
         </div>
-        <button>Register</button>
+        <button>Submit</button>
     </form>
-
-    <form action="/show" class="p-5">
-
 </body>
 </html>

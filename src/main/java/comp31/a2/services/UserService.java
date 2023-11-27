@@ -42,13 +42,51 @@ public class UserService {
       return nutritionistRepo.findAll();
    }
 
+   public List<Trainee> getTraineesWithTrainingPLan(List<Trainee> trainees)
+   {
+      List<Trainee> newList = new ArrayList<Trainee>();
+      for (Trainee trainee : trainees) {
+
+         if(trainee.getTrainingPlan() != null)
+         {
+            newList.add(trainee);
+         }    
+      }
+      return newList;
+   }
+
+   public List<Trainee> getTraineesWithoutTrainingPLan(List<Trainee> trainees)
+   {
+      List<Trainee> newList = new ArrayList<Trainee>();
+      for (Trainee trainee : trainees) {
+
+         if(trainee.getTrainingPlan() == null)
+         {
+            newList.add(trainee);
+         }    
+      }
+      return newList;
+   }
+
    public List<Trainer> findAllTrainers()
    {
       return trainerRepo.findAll();
    }
 
+   public List<Trainee> getTraineesWithNutritionPLan(List<Trainee> trainees)
+   {
+      List<Trainee> newList = new ArrayList<Trainee>();
+      for (Trainee trainee : trainees) {
 
-   public List<Trainee> getTraineesWithoutTrainingPLan(List<Trainee> trainees)
+         if(trainee.getNutritionPlan() != null)
+         {
+            newList.add(trainee);
+         }    
+      }
+      return newList;
+   }
+
+   public List<Trainee> getTraineesWithoutNutritionPLan(List<Trainee> trainees)
    {
       List<Trainee> newList = new ArrayList<Trainee>();
       for (Trainee trainee : trainees) {

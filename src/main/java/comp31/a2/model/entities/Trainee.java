@@ -25,6 +25,7 @@ public class Trainee {
     Nutritionist nutritionist;
     @ManyToOne
     @JoinColumn(name="fkey_trainer")
+    
     Trainer trainer;
     @OneToOne()
     @JoinColumn(name = "tre_user_id")

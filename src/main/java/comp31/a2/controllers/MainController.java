@@ -3,6 +3,7 @@ package comp31.a2.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import comp31.a2.model.entities.NutritionPlan;
 import comp31.a2.model.entities.Nutritionist;
@@ -12,6 +13,7 @@ import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
 import comp31.a2.services.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,25 +28,50 @@ public class MainController {
     Logger logger = LoggerFactory.getLogger(MainController.class);
     UserEntity currentUser;
 
+
     public MainController(UserService userService) {
         this.userService = userService;
     }
-    // Nutrition page
+
+    // @GetMapping("/")
+    // public String getRoot()
+    // {
+    //     return "index";
+    // }
+
+    // Trainee page
     @GetMapping("/")
     public String getRoot(Model model)
     {
         if(currentUser == null)
         {
-            List<UserEntity> nutritionistList = userService.findUsersByUserType(2);
-            Integer listrange = nutritionistList.size();
+            List<UserEntity> traineeList = userService.findUsersByUserType(3);
+            Integer listrange = traineeList.size();
             Random rand = new Random(); 
             Integer upperbound = listrange;
             int int_random = rand.nextInt(upperbound);
-            currentUser = nutritionistList.get(2);
+            currentUser = traineeList.get(2);
         }
         model.addAttribute("currentuser", currentUser);
         return "nutritionistFunctions/nutritionistpage";
     }
+
+    // Nutrition page
+    // @GetMapping("/")
+    // public String getRoot(Model model)
+    // {
+    //     if(currentUser == null)
+    //     {
+    //         List<UserEntity> nutritionistList = userService.findUsersByUserType(2);
+    //         Integer listrange = nutritionistList.size();
+    //         Random rand = new Random(); 
+    //         Integer upperbound = listrange;
+    //         int int_random = rand.nextInt(upperbound);
+    //         currentUser = nutritionistList.get(2);
+    //     }
+    //     model.addAttribute("currentuser", currentUser);
+    //     return "nutritionistFunctions/nutritionistpage";
+    // }
 
     // Training page
     // @GetMapping("/")
@@ -57,7 +84,7 @@ public class MainController {
     //         Random rand = new Random(); 
     //         Integer upperbound = listrange;
     //         int int_random = rand.nextInt(upperbound);
-    //         currentUser = listoftrainer.get(int_random);
+    //         currentUser = listoftrainer.get(2);
     //     }
     //     model.addAttribute("currentuser", currentUser);
     //     return "trainerFunctions/trainerpage";
@@ -89,9 +116,8 @@ public class MainController {
         nutritionPlan.setLitersOfWaterTaken(0);
         userService.addNutritionPlan(nutritionPlan);
         model.addAttribute("currentuser", currentUser);
-        return "nutritionistFunctions/createnutritionplan";
+        return "nutritionistFunctions/nutritionistpage";
     }
-
 
     @GetMapping("/createtrainingplan")
     public String createTrainingPlan(Model model)
@@ -122,17 +148,72 @@ public class MainController {
         return "trainerFunctions/trainerpage";
     }
 
+    @GetMapping("/checkstatsoftrainee")
+    public String checktraineestats(Model model)
+    {  
+        String returnPage = "checkpersonalstats";
+        String pageTitle = "Trainee";
+        Integer userType = currentUser.getUserType();
+        Trainer trainer = new Trainer();
+        Nutritionist nutritionist = new Nutritionist();
+        List<Trainee> traineeList = new ArrayList<Trainee>();
+        switch (userType) {
+            case 1:
+                trainer = currentUser.getTrainer();
+                traineeList = trainer.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                returnPage = "showtraineesstats";
+                pageTitle = "Trainer";
+                break;
+            case 2:
+                nutritionist = currentUser.getNutritionist();
+                traineeList = nutritionist.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                returnPage = "showtraineesstats";
+                pageTitle = "Nutritionist";
+                break;   
+        }
+        model.addAttribute("show", false);
+        model.addAttribute("currentuser", currentUser);
+        model.addAttribute("title", pageTitle);
+        return returnPage;
+    }
+
+    @GetMapping("/showstats")
+    public String showTraineeStats(Model model, @RequestParam Integer chosenTrainee) {
+        String pageTitle = "";
+        Integer userType = currentUser.getUserType();
+        Trainer trainer = new Trainer();
+        Nutritionist nutritionist = new Nutritionist();
+        List<Trainee> traineeList = new ArrayList<Trainee>();
+        Trainee showTrainee = userService.findTraineeById(chosenTrainee);
+        switch (userType) {
+            case 1:
+                trainer = currentUser.getTrainer();
+                traineeList = trainer.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                pageTitle = "Trainer";
+                break;
+            case 2:
+                nutritionist = currentUser.getNutritionist();
+                traineeList = nutritionist.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                pageTitle = "Nutritionist";
+                break;   
+        }
+        model.addAttribute("showTrainee", showTrainee);
+        model.addAttribute("show", true);
+        model.addAttribute("currentuser", currentUser);
+        model.addAttribute("title", pageTitle);
+        return "showtraineesstats";
+    }
+
+
+
     @GetMapping("/usecase1")
     public String showAllUsers(Model model) {
-
         List<UserEntity> users = userService.findAllUsers();
-        // List<UserEntity> users = userService.findUsersByFirstName("Pablo");
-
-        // List<UserEntity> users = userService.findUsersByUserType(0);
-
-
-        model.addAttribute("users", users);
-        
+        model.addAttribute("users", users);    
         return "examples/showAllUsers";
     }
 
