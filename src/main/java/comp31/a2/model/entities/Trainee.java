@@ -40,6 +40,8 @@ public class Trainee {
         this.trainer = trainer;
     }
 
+    
+
     // public Trainee(String username, String firstName, String lastName, String password, Nutritionist nutritionist,
     //         Trainer trainer) {
     //     this.username = username;
