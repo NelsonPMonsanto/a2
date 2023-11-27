@@ -124,7 +124,7 @@ public class UserService {
       return userRepo.findAll();
    }
 
-   public List<UserEntity> findUsersByFirstName(String name)
+   public UserEntity findByFirstName(String name)
    {
       return userRepo.findByFirstName(name);
    }

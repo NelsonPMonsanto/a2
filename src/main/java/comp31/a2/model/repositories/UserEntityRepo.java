@@ -11,7 +11,7 @@ public interface UserEntityRepo extends CrudRepository<UserEntity,Integer>{
     
     public List<UserEntity> findAll();
 
-    public List<UserEntity> findByFirstName(String Name);
+    public UserEntity findByFirstName(String Name);
 
     public List<UserEntity> findByUserType(Integer type);
 

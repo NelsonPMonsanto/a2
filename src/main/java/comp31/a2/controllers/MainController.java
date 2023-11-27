@@ -45,15 +45,15 @@ public class MainController {
     {
         if(currentUser == null)
         {
-            List<UserEntity> traineeList = userService.findUsersByUserType(3);
+            List<UserEntity> traineeList = userService.findUsersByUserType(0);
             Integer listrange = traineeList.size();
             Random rand = new Random(); 
             Integer upperbound = listrange;
             int int_random = rand.nextInt(upperbound);
-            currentUser = traineeList.get(2);
+            currentUser = traineeList.get(int_random);
         }
         model.addAttribute("currentuser", currentUser);
-        return "nutritionistFunctions/nutritionistpage";
+        return "traineepage";
     }
 
     // Nutrition page
@@ -157,6 +157,8 @@ public class MainController {
         Trainer trainer = new Trainer();
         Nutritionist nutritionist = new Nutritionist();
         List<Trainee> traineeList = new ArrayList<Trainee>();
+        boolean show = false;
+
         switch (userType) {
             case 1:
                 trainer = currentUser.getTrainer();
@@ -172,10 +174,15 @@ public class MainController {
                 returnPage = "showtraineesstats";
                 pageTitle = "Nutritionist";
                 break;   
+            default:
+                pageTitle = "Trainee";
+                show = true;
+            break;
         }
-        model.addAttribute("show", false);
+        model.addAttribute("show", show);
         model.addAttribute("currentuser", currentUser);
         model.addAttribute("title", pageTitle);
+
         return returnPage;
     }
 
@@ -199,7 +206,10 @@ public class MainController {
                 traineeList = nutritionist.getTrainees();
                 model.addAttribute("traineeList",traineeList);
                 pageTitle = "Nutritionist";
-                break;   
+                break; 
+            default:
+                pageTitle = "Trainee";
+            break;  
         }
         model.addAttribute("showTrainee", showTrainee);
         model.addAttribute("show", true);
@@ -207,8 +217,6 @@ public class MainController {
         model.addAttribute("title", pageTitle);
         return "showtraineesstats";
     }
-
-
 
     @GetMapping("/usecase1")
     public String showAllUsers(Model model) {
@@ -246,7 +254,7 @@ public class MainController {
     @GetMapping("/usecase5")
     public String findUsersByFirstName(Model model) {
 
-        List<UserEntity> users = userService.findUsersByFirstName("Paul");
+        UserEntity users = userService.findByFirstName("Paul");
 
         model.addAttribute("users", users);
         return "examples/findUsersByFirstName";
