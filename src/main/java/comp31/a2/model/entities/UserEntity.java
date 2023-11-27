@@ -19,26 +19,21 @@ public class UserEntity {
     String firstName;
     String lastName;
     String password;
-    Boolean ifTrainer;
+    Integer userType; //0-Trainee 1-Trainer 2-Nutrtitionist
     @OneToOne(mappedBy = "user_trainer")
     Trainer trainer;
 
-    Boolean ifTrainee;
     @OneToOne(mappedBy = "user_trainee")
     Trainee trainee;
 
-    Boolean ifNutritionist;
     @OneToOne(mappedBy = "user_nutritionist")
     Nutritionist nutritionist;
-    public UserEntity(String username, String firstName, String lastName, String password, Boolean ifTrainer,
-            Boolean ifTrainee, Boolean ifNutritionist) {
+    public UserEntity(String username, String firstName, String lastName, String password, Integer userType) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.ifTrainer = ifTrainer;
-        this.ifTrainee = ifTrainee;
-        this.ifNutritionist = ifNutritionist;
+        this.userType = userType;
     }
 
 
