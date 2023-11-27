@@ -64,9 +64,9 @@ public class UserService {
             trainerWithLeastTrainees = trainer;
          }
       }
-
       return trainerWithLeastTrainees;
    }
+   
    public Nutritionist findNutritionistWithLeastClients(List<Nutritionist> nutritionists) {
       Nutritionist nutritionistWithLeastClients = null;
       int minClients = Integer.MAX_VALUE;
@@ -78,9 +78,6 @@ public class UserService {
               nutritionistWithLeastClients = nutritionist;
           }
       }
-  
       return nutritionistWithLeastClients;
   }
-  
- 
 }
