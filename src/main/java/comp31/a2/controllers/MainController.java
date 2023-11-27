@@ -89,6 +89,7 @@ public class MainController {
         return "findUsersByFirstName";
     }
 
+
     @GetMapping({"/usecase6"})
     public String createAccount(Model model) {
         Trainee trainee = traineeRepo.findTraineeById(7);
@@ -100,7 +101,27 @@ public class MainController {
         model.addAttribute("trainee", trainee7);
         return "createAccount";
     }
+    @GetMapping({"/usecase7"})
+    public String assignNewMentor(Model model) {
+        Trainee trainee = traineeRepo.findTraineeById(6);
+        List<Trainer> trainers = userService.findAllTrainers();
+        List<Nutritionist> nutritionists = userService.findAllNutritionist();
 
+
+        model.addAttribute("trainee", trainee);
+        UserEntity userEntity17 = new UserEntity("sijan", "Sijan", "Udas", "qwer17", 0);
+        userRepo.save(userEntity17);
+        Trainee trainee7 = new Trainee(null, null, userEntity17);
+        traineeRepo.save(trainee7);
+        model.addAttribute("trainee", trainee7);
+
+        model.addAttribute("nutritionists", nutritionists);
+
+        model.addAttribute("trainers", trainers);
+
+
+        return "assignNewMentor";
+    }
 
     @PostMapping("/addMentors")
     public String assignMentors(Model model) {
@@ -116,6 +137,33 @@ public class MainController {
 
         return "redirect:/createAccount";
     }
+    @PostMapping("/assignNewMentor")
+    public String assignNewMentors(Model model) {
+        List<Trainer> trainers = userService.findAllTrainers();
+        List<Nutritionist> nutritionist = userService.findAllNutritionist();
+        Nutritionist nutritionistWLeastClients = userService.findNutritionistWithLeastClients(nutritionist);
+        Trainer trainerWLeastClients = userService.findTrainerWithLeastTrainees(trainers);
+
+        Trainee trainee = traineeRepo.findTraineeById(7);
+       /* trainee.setNutritionist(nutritionistWLeastClients);
+        trainee.setTrainer(trainerWLeastClients);*/
+
+
+        traineeRepo.save(trainee);
+
+        return "redirect:/assignNewMentor";
+    }
+    @GetMapping("/assignNewMentor")
+    public String assignedNewMentor(Model model)
+    {
+        Trainee trainee = traineeRepo.findTraineeById(7);
+        model.addAttribute("trainee", trainee);
+        model.addAttribute("nutritionists", userService.findAllNutritionist());
+        model.addAttribute("trainers", userService.findAllTrainers());
+
+        return "assignNewMentor";
+    }
+
     @GetMapping("/createAccount")
     public String assignedMentors(Model model)
     {
