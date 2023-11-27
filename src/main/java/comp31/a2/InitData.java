@@ -111,7 +111,10 @@ public class InitData implements CommandLineRunner {
         // Trainee trainee7 = new Trainee(null,null,userEntity17);
         // traineeRepo.save(trainee7);
         
-
+        // UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
+        // userRepo.save(userEntity17);
+        // Trainee trainee7 = new Trainee(null, null, userEntity17);
+        // traineeRepo.save(trainee7);
 
 
 

@@ -9,7 +9,7 @@
 
 <body>
     <h1>Create Account</h1>
-    <form action="/addMentors" method="post" >
+    
         <table>
             <tr>
                 <th>ID</th>
@@ -20,7 +20,7 @@
                 <th>Nutritionist Name</th>
             </tr>
             <tr th:each="trainee:${trainee}">
-                <td th:text="${trainee.user_trainee.Id}"></td>
+                <td th:text="${trainee.Id}"></td>
                 <td th:text="${trainee.user_trainee.username}"></td>
                 <td th:text="${trainee.user_trainee.firstName}"></td>
                 <td th:text="${trainee.user_trainee.lastName}"></td>
@@ -33,6 +33,7 @@
 
             </tr>
         </table>
+    <form action="/addMentors" method="post" >
         <button>Add Mentors</button>
     </form>
     <button><a href="/">Home</a></button>

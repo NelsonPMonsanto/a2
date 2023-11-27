@@ -24,6 +24,7 @@ public class MainController {
     TraineeRepo traineeRepo;
     UserEntityRepo userRepo;
     // Logger logger = LoggerFactory.getLogger(MainController.class);
+    
 
     public MainController(UserService userService, TraineeRepo traineeRepo, UserEntityRepo userRepo) {
         this.userService = userService;
@@ -88,8 +89,10 @@ public class MainController {
         return "findUsersByFirstName";
     }
 
-    @GetMapping("/usecase6")
+    @GetMapping({"/usecase6"})
     public String createAccount(Model model) {
+        Trainee trainee = traineeRepo.findTraineeById(7);
+        model.addAttribute("trainee", trainee);
         UserEntity userEntity17 = new UserEntity("nick", "Nick", "Elio", "qwer17", 0);
         userRepo.save(userEntity17);
         Trainee trainee7 = new Trainee(null, null, userEntity17);
@@ -98,17 +101,27 @@ public class MainController {
         return "createAccount";
     }
 
+
     @PostMapping("/addMentors")
     public String assignMentors(Model model) {
         List<Trainer> trainers = userService.findAllTrainers();
-        model.addAttribute("trainers", trainers);
-        Trainer leastClients = userService.findTrainerWithLeastTrainees(trainers);
+        List<Nutritionist> nutritionist = userService.findAllNutritionist();
+        Nutritionist nutritionistWLeastClients = userService.findNutritionistWithLeastClients(nutritionist);
+        Trainer trainerWLeastClients = userService.findTrainerWithLeastTrainees(trainers);
 
-        Trainee trainee = traineeRepo.findTraineeById(17);
-        trainee.setTrainer(leastClients);
+        Trainee trainee = traineeRepo.findTraineeById(7);
+        trainee.setNutritionist(nutritionistWLeastClients);
+        trainee.setTrainer(trainerWLeastClients);
         traineeRepo.save(trainee);
 
-        return "redirect:/usecase6";
+        return "redirect:/createAccount";
+    }
+    @GetMapping("/createAccount")
+    public String assignedMentors(Model model)
+    {
+        Trainee trainee = traineeRepo.findTraineeById(7);
+        model.addAttribute("trainee", trainee);
+        return "createAccount";
     }
 
 }

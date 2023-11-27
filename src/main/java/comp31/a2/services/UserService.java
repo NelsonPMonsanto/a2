@@ -67,4 +67,20 @@ public class UserService {
 
       return trainerWithLeastTrainees;
    }
+   public Nutritionist findNutritionistWithLeastClients(List<Nutritionist> nutritionists) {
+      Nutritionist nutritionistWithLeastClients = null;
+      int minClients = Integer.MAX_VALUE;
+  
+      for (Nutritionist nutritionist : nutritionists) {
+          int clientCount = nutritionist.getTrainees().size();
+          if (clientCount < minClients) {
+              minClients = clientCount;
+              nutritionistWithLeastClients = nutritionist;
+          }
+      }
+  
+      return nutritionistWithLeastClients;
+  }
+  
+ 
 }
