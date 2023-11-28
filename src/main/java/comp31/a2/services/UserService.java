@@ -81,6 +81,26 @@ public class UserService {
   
       return nutritionistWithLeastClients;
   }
-  
- 
+
+
+  public Nutritionist findNutritionistById(Integer Id ,List<Nutritionist> nutritionists) {
+
+     Nutritionist newNutritionist=null;
+     for (Nutritionist nutritionist : nutritionists) {
+        if(nutritionist.getId()==Id){
+           newNutritionist=nutritionist;
+        }
+     }
+
+     return newNutritionist;
+  }
+   public Trainer findTrainerById(Integer Id,List<Trainer> trainers) {
+      Trainer newTrainer=null;
+        for (Trainer trainer : trainers) {
+             if(trainer.getId()==Id){
+                newTrainer=trainer;
+             }
+        }
+      return newTrainer;
+   }
 }

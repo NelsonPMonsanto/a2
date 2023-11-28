@@ -4,57 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Assign New Mentor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4caf50;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
-<body>
-<h1>Create Account</h1>
+<body><h1>Assign New Mentor</h1>
+<form action="/assignNewMentor" method="post">
+    <div>
+        <label for="selectedNutritionist">Select Nutritionist:</label>
+        <select name="selectedNutritionist" id="selectedNutritionist">
+            <option value="">-- Select Nutritionist --</option>
+            <th:block th:each="nutritionist : ${nutritionists}">
+                <option th:value="${nutritionist.user_nutritionist.id}" th:text="${nutritionist.user_nutritionist.id}+'.  '+${nutritionist.user_nutritionist.firstName + ' ' + nutritionist.user_nutritionist.lastName}">
+                </option>
+            </th:block>
+        </select>
 
+        <br>
+
+        <label for="selectedTrainer">Select Trainer:</label>
+        <select name="selectedTrainer" id="selectedTrainer">
+            <option value="">-- Select Trainer --</option>
+            <th:block th:each="trainer : ${trainers}">
+                <option th:value="${trainer.user_trainer.id}" th:text="${trainer.user_trainer.id}+'.  '+${trainer.user_trainer.firstName + ' ' + trainer.user_trainer.lastName}">
+                </option>
+            </th:block>
+        </select>
+
+
+        <br>
+    </div>
+    <button type="submit">Assign New Mentor</button>
+</form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 <table>
     <tr>
-        <th>Mentor Name</th>
+        <th>ID</th>
+        <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>User Type</th>
-        <th>Assigned Tutees</th>
-        <th>Pick One Mentor</th>
+        <th>Trainer Name</th>
+        <th>Nutritionist Name</th>
     </tr>
-
-
-
-    <tr th:each="nutritionist:${nutritionists}">
-        <td th:text="${nutritionist.user_nutritionist.username}"></td>
-        <td th:text="${nutritionist.user_nutritionist.firstName}"></td>
-        <td th:text="${nutritionist.user_nutritionist.lastName}"></td>
-        <td th:text="'Nutritionist'"></td>
-        <td>
-            <div th:each="trainee:${nutritionist.trainees}">
-                <p th:text="${trainee.user_trainee.firstName} + ' ' + ${trainee.user_trainee.id}"></p>
-            </div>
-        </td>
-        <td>
-        <input type="radio" name="selectedNutritionist" th:value="${nutritionist.user_nutritionist.username}" />
-        </td>
+    <tr>
+        <td th:text="${trainee.user_trainee.id}"></td>
+        <td th:text="${trainee.user_trainee.username}"></td>
+        <td th:text="${trainee.user_trainee.firstName}"></td>
+        <td th:text="${trainee.user_trainee.lastName}"></td>
+ <!--       <td th:text="${trainee.trainer.user_trainer.firstName}"></td>
+        <td th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>-->
     </tr>
-    <tr th:each="trainer:${trainers}">
-        <td th:text="${trainer.user_trainer.username}"></td>
-        <td th:text="${trainer.user_trainer.firstName}"></td>
-        <td th:text="${trainer.user_trainer.lastName}"></td>
-        <td th:text="'Trainer'"></td>
-        <td>
-            <div th:each="trainee:${trainer.trainees}">
-                <p th:text="${trainee.user_trainee.firstName} + ' ' + ${trainee.user_trainee.id}"></p>
-            </div>
-        </td>
-        <td>
-            <input type="radio" name="selectedTrainer" th:value="${trainer.user_trainer.username}" />
-        </td>
-    </tr>
-
 </table>
-<form action="/assignNewMentor" method="post" >
-    <button>Assign New Mentor</button>
-</form>
+
+
+
+
 <button><a href="/">Home</a></button>
 </body>
 
