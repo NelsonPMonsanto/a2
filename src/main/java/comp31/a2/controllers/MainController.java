@@ -20,6 +20,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
+<<<<<<< HEAD
+UserService userService;
+    @GetMapping("/uc1")
+    public String getUseCase1(Model model) {
+
+        List<Trainer> trainers = userService.findAllTrainers();
+        model.addAttribute("trainers", trainers);
+
+        List<Trainee> trainees = userService.findAllTrainees();
+        model.addAttribute("trainees", trainees);
+
+        List<UserEntity> users = userService.findAllUsers();
+=======
 
     UserService userService;
     TraineeRepo traineeRepo;
@@ -43,6 +56,7 @@ public class MainController {
 
         List<UserEntity> users = userService.findAllUsers();
         // List<UserEntity> users = userService.findUsersByFirstName("Pablo");
+>>>>>>> 5b2e5fff52a6cdbb2fcf854d8494235879ec8fb0
         // logger.info("here", users.size());
         model.addAttribute("users", users);
         List<Trainer> trainers = userService.findAllTrainers();

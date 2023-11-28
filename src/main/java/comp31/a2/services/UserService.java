@@ -1,5 +1,4 @@
 package comp31.a2.services;
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -33,17 +32,19 @@ public class UserService {
       return nutritionistRepo.findAll();
    }
 
-   public List<Trainer> findAllTrainers() {
-      return trainerRepo.findAll();
-   }
+    public  List<Trainer> findAllTrainers()
+    {
+       return trainerRepo.findAll();
+    }
 
-   public List<Trainee> findAllTrainees() {
-      return traineeRepo.findAll();
-   }
-
-   public List<UserEntity> findAllUsers() {
-      return userRepo.findAll();
-   }
+    public List<Trainee> findAllTrainees()    {
+       return traineeRepo.findAll();
+    }
+    
+    public List<UserEntity> findAllUsers()
+    {
+       return userRepo.findAll();
+    }
 
    public List<UserEntity> findUsersByFirstName(String name) {
       return userRepo.findByFirstName(name);
@@ -70,7 +71,7 @@ public class UserService {
    public Nutritionist findNutritionistWithLeastClients(List<Nutritionist> nutritionists) {
       Nutritionist nutritionistWithLeastClients = null;
       int minClients = Integer.MAX_VALUE;
-  
+
       for (Nutritionist nutritionist : nutritionists) {
           int clientCount = nutritionist.getTrainees().size();
           if (clientCount < minClients) {
@@ -78,7 +79,7 @@ public class UserService {
               nutritionistWithLeastClients = nutritionist;
           }
       }
-  
+
       return nutritionistWithLeastClients;
   }
 
