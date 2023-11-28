@@ -68,7 +68,7 @@
         <select name="selectedNutritionist" id="selectedNutritionist">
             <option value="">-- Select Nutritionist --</option>
             <th:block th:each="nutritionist : ${nutritionists}">
-                <option th:value="${nutritionist.user_nutritionist.id}" th:text="${nutritionist.user_nutritionist.id}+'.  '+${nutritionist.user_nutritionist.firstName + ' ' + nutritionist.user_nutritionist.lastName}">
+                <option th:value="${nutritionist.id}" th:text="${nutritionist.user_nutritionist.id}+'.  '+${nutritionist.user_nutritionist.firstName + ' ' + nutritionist.user_nutritionist.lastName}">
                 </option>
             </th:block>
         </select>
@@ -79,7 +79,7 @@
         <select name="selectedTrainer" id="selectedTrainer">
             <option value="">-- Select Trainer --</option>
             <th:block th:each="trainer : ${trainers}">
-                <option th:value="${trainer.user_trainer.id}" th:text="${trainer.user_trainer.id}+'.  '+${trainer.user_trainer.firstName + ' ' + trainer.user_trainer.lastName}">
+                <option th:value="${trainer.id}" th:text="${trainer.user_trainer.id}+'.  '+${trainer.user_trainer.firstName + ' ' + trainer.user_trainer.lastName}">
                 </option>
             </th:block>
         </select>
@@ -110,8 +110,8 @@
         <td th:text="${trainee.user_trainee.username}"></td>
         <td th:text="${trainee.user_trainee.firstName}"></td>
         <td th:text="${trainee.user_trainee.lastName}"></td>
- <!--       <td th:text="${trainee.trainer.user_trainer.firstName}"></td>
-        <td th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>-->
+       <td th:text="${trainee.trainer.user_trainer.firstName}"></td>
+        <td th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>
     </tr>
 </table>
 
