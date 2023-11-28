@@ -84,18 +84,22 @@ public class UserService {
   }
 
 
-  public Nutritionist findNutritionistById(Integer Id ,List<Nutritionist> nutritionists) {
+  public Nutritionist findNutritionistById(Integer Id) {
 
+     List<Nutritionist> nutritionists = nutritionistRepo.findAll();
      Nutritionist newNutritionist=null;
+
      for (Nutritionist nutritionist : nutritionists) {
-        if(nutritionist.getId()==Id){
+        if(nutritionist.getId() == Id){
            newNutritionist=nutritionist;
+           break;
         }
      }
-
      return newNutritionist;
   }
-   public Trainer findTrainerById(Integer Id,List<Trainer> trainers) {
+   public Trainer findTrainerById(Integer Id) {
+      List<Trainer> trainers = trainerRepo.findAll();
+
       Trainer newTrainer=null;
         for (Trainer trainer : trainers) {
              if(trainer.getId()==Id){

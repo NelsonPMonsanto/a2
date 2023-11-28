@@ -1,5 +1,6 @@
 package comp31.a2.controllers;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
-<<<<<<< HEAD
-UserService userService;
+    UserService userService;
+    TraineeRepo traineeRepo;
+    UserEntityRepo userRepo;
+
+    public MainController(UserService userService,TraineeRepo traineeRepo,UserEntityRepo userRepo)
+    {
+        this.traineeRepo = traineeRepo;
+        this.userService = userService;
+        this.userRepo = userRepo;
+    }
+
+
+
     @GetMapping("/uc1")
     public String getUseCase1(Model model) {
 
@@ -32,35 +44,9 @@ UserService userService;
         model.addAttribute("trainees", trainees);
 
         List<UserEntity> users = userService.findAllUsers();
-=======
-
-    UserService userService;
-    TraineeRepo traineeRepo;
-    UserEntityRepo userRepo;
-    // Logger logger = LoggerFactory.getLogger(MainController.class);
-    
-
-    public MainController(UserService userService, TraineeRepo traineeRepo, UserEntityRepo userRepo) {
-        this.userService = userService;
-        this.traineeRepo = traineeRepo;
-        this.userRepo = userRepo;
-    }
-
-    @GetMapping("/")
-    public String getRoot() {
-        return "index";
-    }
-
-    @GetMapping("/usecase1")
-    public String showAllUsers(Model model) {
-
-        List<UserEntity> users = userService.findAllUsers();
-        // List<UserEntity> users = userService.findUsersByFirstName("Pablo");
->>>>>>> 5b2e5fff52a6cdbb2fcf854d8494235879ec8fb0
         // logger.info("here", users.size());
         model.addAttribute("users", users);
-        List<Trainer> trainers = userService.findAllTrainers();
-        model.addAttribute("trainers", trainers);
+
         List<Nutritionist> nutritionists = userService.findAllNutritionist();
         model.addAttribute("nutritionists", nutritionists);
 
@@ -154,28 +140,23 @@ UserService userService;
     }
     @PostMapping("/assignNewMentor")
     public String assignNewMentors(Integer selectedNutritionist , Integer selectedTrainer) {
-        List<Trainer> trainers = userService.findAllTrainers();
-        List<Nutritionist> nutritionist = userService.findAllNutritionist();
-
         Trainee trainee = traineeRepo.findTraineeById(7);
-    //    System.out.println(" ================================ "+trainee.getId());
         Nutritionist newNutritionist ;
         Trainer newTrainer ;
         System.out.println("================Selected Nutritionist:    "+selectedNutritionist);
         System.out.println("================Selected Trainer:    "+selectedTrainer);
         // Check if selectedNutritionist is not null and find the corresponding Nutritionist
-        if (selectedNutritionist != null) {
-            newNutritionist = userService.findNutritionistById(selectedNutritionist, nutritionist);
-            System.out.println("==================================newnutritionist id   ===="+newNutritionist.getId());
-            trainee.setNutritionist(newNutritionist);
 
+        if (selectedNutritionist != null) {
+            newNutritionist = userService.findNutritionistById(selectedNutritionist);
+            trainee.setNutritionist(newNutritionist);
         }
 
         // Check if selectedTrainer is not null and find the corresponding Trainer
         if (selectedTrainer != null) {
-            newTrainer = userService.findTrainerById(selectedTrainer, trainers);
+            newTrainer = userService.findTrainerById(selectedTrainer);
+            // System.out.println("================new treinaer id    "+newTrainer.getId());
             trainee.setTrainer(newTrainer);
-
         }
 
         // Set the Nutritionist and Trainer for the Trainee
