@@ -28,8 +28,10 @@ public class Nutritionist {
     @OneToMany(mappedBy = "nutritionist")
     List<Trainee> trainees;
     @OneToOne()
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "ntr_user_id")
     UserEntity user_nutritionist;
+
+    
 
     public Nutritionist(UserEntity user_nutritionist) {
         this.user_nutritionist = user_nutritionist;

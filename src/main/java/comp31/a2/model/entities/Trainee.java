@@ -20,19 +20,22 @@ public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
-    // String username;
-    // String firstName;
-    // String lastName;
-    // String password;
     @ManyToOne
     @JoinColumn(name="fkey_nutritionist")
     Nutritionist nutritionist;
     @ManyToOne
     @JoinColumn(name="fkey_trainer")
+    
     Trainer trainer;
     @OneToOne()
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "tre_user_id")
     UserEntity user_trainee;
+
+    @OneToOne(mappedBy = "trainee_nutri_plan")
+    NutritionPlan nutritionPlan;
+
+    @OneToOne(mappedBy = "trainee_train_plan")
+    TrainingPlan trainingPlan;
 
     public Trainee(Nutritionist nutritionist, Trainer trainer, UserEntity user_trainee) {
         this.user_trainee = user_trainee;
