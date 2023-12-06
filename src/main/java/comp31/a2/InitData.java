@@ -1,15 +1,19 @@
 package comp31.a2;
 
+//import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import comp31.a2.model.entities.NutritionPlan;
+// import comp31.a2.model.entities.NutritionPlan;
 import comp31.a2.model.entities.Nutritionist;
+//import comp31.a2.model.entities.NewTrainingSession;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
-import comp31.a2.model.entities.TrainingPlan;
+// import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
 import comp31.a2.model.repositories.NutritionPlanRepo;
+//import comp31.a2.model.repositories.NewTrainingSessionRepo;
 import comp31.a2.model.repositories.NutritionistRepo;
 import comp31.a2.model.repositories.TraineeRepo;
 import comp31.a2.model.repositories.TrainerRepo;
@@ -48,11 +52,11 @@ public class InitData implements CommandLineRunner {
         userRepo.save(userEntity11);
         userRepo.save(userEntity14);
 
-        Trainer trainer1 = new Trainer(userEntity1);
-        Trainer trainer2 = new Trainer(userEntity5);
-        Trainer trainer3 = new Trainer(userEntity8);
-        Trainer trainer4 = new Trainer(userEntity11);
-        Trainer trainer5 = new Trainer(userEntity14);
+        Trainer trainer1 = new Trainer(userEntity1, true);
+        Trainer trainer2 = new Trainer(userEntity5, false);
+        Trainer trainer3 = new Trainer(userEntity8, true);
+        Trainer trainer4 = new Trainer(userEntity11, false);
+        Trainer trainer5 = new Trainer(userEntity14, true);
         trainerRepo.save(trainer1);
         trainerRepo.save(trainer2);
         trainerRepo.save(trainer3);

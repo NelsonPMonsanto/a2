@@ -30,6 +30,8 @@ public class Trainee {
     @OneToOne()
     @JoinColumn(name = "tre_user_id")
     UserEntity user_trainee;
+    @OneToOne(mappedBy = "trainee_session")
+    NewTrainingSession newTrainingSession;
 
     @OneToOne(mappedBy = "trainee_nutri_plan")
     NutritionPlan nutritionPlan;
@@ -42,6 +44,8 @@ public class Trainee {
         this.nutritionist = nutritionist;
         this.trainer = trainer;
     }
+
+    
 
     // public Trainee(String username, String firstName, String lastName, String password, Nutritionist nutritionist,
     //         Trainer trainer) {
