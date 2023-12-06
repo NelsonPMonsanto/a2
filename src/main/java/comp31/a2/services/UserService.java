@@ -108,7 +108,6 @@ public class UserService {
    {
       List<Trainee> trainees = traineeRepo.findAll();
          
-      // ;
       for (Trainee trainee : trainees) {
          
          if (trainee.getId() == id)
@@ -124,10 +123,10 @@ public class UserService {
       return userRepo.findAll();
    }
 
-   public UserEntity findByFirstName(String name)
-   {
-      return userRepo.findByFirstName(name);
-   }
+   // public UserEntity findByFirstName(String name)
+   // {
+   //    return userRepo.findByFirstName(name);
+   // }
 
    public List<UserEntity> findUsersByUserType(Integer type)
    {

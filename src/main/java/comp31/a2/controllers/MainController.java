@@ -45,7 +45,6 @@ public class MainController {
             int int_random = rand.nextInt(upperbound);
             currentUser = userList.get(int_random);
         }
-        
         switch (currentUser.getUserType()) {
             case 0:
                 returnpage = "traineepage";
@@ -60,7 +59,7 @@ public class MainController {
         model.addAttribute("currentuser", currentUser);
         return returnpage;
     }
-
+    //Made by Nelson
     @GetMapping("/createnutritionplan")
     public String createNutritionPlan(Model model)
     {
@@ -76,18 +75,11 @@ public class MainController {
         model.addAttribute("currentuser", currentUser);
         model.addAttribute("newNutritionplan", nutritionPlan);
         return "nutritionistFunctions/createnutritionplan";
-    
+    }
     // public String getRoot() {
     //     return "index";
     // }
-
-    @GetMapping({"/usercase1","/showUsers"})
-    public String showAllUsers(Model model) {
-        List<UserEntity> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "showAllUsers";
-    }
-
+    //Made by Nelson
     @PostMapping("/add-nutrition-plan")
     public String addNutritionPlan(NutritionPlan nutritionPlan, Model model)
     {   
@@ -99,7 +91,7 @@ public class MainController {
         model.addAttribute("currentuser", currentUser);
         return "nutritionistFunctions/nutritionistpage";
     }
-
+    //Made by Nelson
     @GetMapping("/createtrainingplan")
     public String createTrainingPlan(Model model)
     {
@@ -116,7 +108,7 @@ public class MainController {
         model.addAttribute("newtrainingplan", trainingPlan);
         return "trainerFunctions/createtrainingplan";
     }
-
+    //Made by Nelson
     @PostMapping("/add-training-plan")
     public String addTrainingPlan(TrainingPlan trainingPlan, Model model)
     {   
@@ -127,19 +119,8 @@ public class MainController {
         userService.addTrainingPlan(trainingPlan);
         model.addAttribute("currentuser", currentUser);
         return "trainerFunctions/trainerpage";
-    @GetMapping("/usecase2")
-    public String showAllTrainers(Model model) {
-        List<Trainer> trainers = userService.findAllTrainers();
-        model.addAttribute("trainers", trainers);
-        return "showAllTrainers";
     }
-
-    @GetMapping("/usecase3")
-    public String showAllNutritionist(Model model) {
-        List<Nutritionist> nutritionists = userService.findAllNutritionist();
-        model.addAttribute("nutritionists", nutritionists);
-        return "showAllNutritionist";
-    }
+    //Made by Nelson
     @GetMapping("/checkstatsoftrainee")
     public String checktraineestats(Model model)
     {  
@@ -177,19 +158,13 @@ public class MainController {
         return returnPage;
     }
 
-    @GetMapping("/usecase5")
-    public String findUsersByFirstName(Model model) {
-        List<UserEntity> users = userService.findUsersByFirstName("Paul");
-        model.addAttribute("users", users);
-        return "findUsersByFirstName";
-    }
-
+    //Made by Abdellah
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("userEntity", new UserEntity());
         return "register";
     }
-
+    //Made by Abdellah
     @PostMapping("/register")
     public String registerUser(UserEntity userEntity) {
         userService.saveUser(userEntity);
@@ -212,11 +187,43 @@ public class MainController {
         }
         return "redirect:/showUsers";
     }
-
+    //Made by Abdellah
     @GetMapping("/user-details")
     public String showUserDetails(Model model) {
         List<UserEntity> users = userService.findUsersByFirstName("Paul");
         model.addAttribute("users", users);
         return "findUsersByFirstName";
     }
+
+
+
+
+    @GetMapping({"/usercase1","/showUsers"})
+    public String showAllUsers(Model model) {
+        List<UserEntity> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "showAllUsers";
+    }
+
+    @GetMapping("/usecase2")
+    public String showAllTrainers(Model model) {
+        List<Trainer> trainers = userService.findAllTrainers();
+        model.addAttribute("trainers", trainers);
+        return "showAllTrainers";
+    }
+
+    @GetMapping("/usecase3")
+    public String showAllNutritionist(Model model) {
+        List<Nutritionist> nutritionists = userService.findAllNutritionist();
+        model.addAttribute("nutritionists", nutritionists);
+        return "showAllNutritionist";
+    }
+
+    @GetMapping("/usecase5")
+    public String findUsersByFirstName(Model model) {
+        List<UserEntity> users = userService.findUsersByFirstName("Paul");
+        model.addAttribute("users", users);
+        return "findUsersByFirstName";
+    }
+
 }
