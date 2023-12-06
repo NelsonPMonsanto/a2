@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check stats of trainees</title>
+</head>
+<body>
+    <h1 th:text="${title} +' page'"></h1>
+    <h2 th:text="${currentuser.username}"></h2>
+
+    <h2>Choose the trainee to see their statistics</h2>
+    <form action="/showstats" class="p-5">
+        <label for="trainee" class="form-label">Trainees</label>
+        <br>
+        <select th:name="chosenTrainee">
+            <option th:each="trainee:${traineeList}" th:text="${trainee.user_trainee.firstName}" th:value="${trainee.id}"></option>
+        </select>
+
+        <button>Show</button>
+    </form>
+
+    <div class="right" th:if="${show}">
+
+        <h3 th:text="${showTrainee.user_trainee.firstName} + ' ' +  ${showTrainee.user_trainee.lastName}"></h3>
+        
+        <div>
+            <h4>Training Statistic</h4> 
+
+            <table th:if="${showTrainee.trainingPlan != null}" id="all">
+                <tr>
+                    <th>Goal</th>
+                    <th>Muscle to prioritize</th>
+                    <th>Excercise to avoid</th>
+                    <th>Current weight</th>
+                    <th>Total training hours</th>
+                </tr>
+                <tr>
+                    <td th:text="${showTrainee.trainingPlan.goal}"></td>
+                    <td th:text="${showTrainee.trainingPlan.musclePriority}"></td>
+                    <td th:text="${showTrainee.trainingPlan.excercisetoavoid}"></td>
+                    <td th:text="${showTrainee.trainingPlan.weight} + 'kg'"></td>
+                    <td th:text="${showTrainee.trainingPlan.trainingHours + ' hours this month'}"></td>
+                </tr>
+            </table>
+
+            <div th:if="${showTrainee.trainingPlan == null}" >
+                <p>This user does not have a training plan</p>
+            <div>
+        </div>
+
+        <div>
+            <h4>Nutrition Statistic</h4> 
+            <table th:if="${showTrainee.nutritionPlan != null}" id="all">
+                <tr>
+                    <th>Goal</th>
+                    <th>Muscle to prioritize</th>
+                    <th>Excercise to avoid</th>
+                    <th>Current weight</th>
+                    <th>Total training hours</th>
+                </tr>
+                <tr>
+                    <td th:text="${showTrainee.nutritionPlan.goal}"></td>
+                    <td th:text="${showTrainee.nutritionPlan.foodToAvoid}"></td>
+                    <td th:text="${showTrainee.nutritionPlan.foodToPriotize}"></td>
+                    <td th:text="${showTrainee.nutritionPlan.caloriesIntake} + 'calories'"></td>
+                    <td th:text="${showTrainee.nutritionPlan.litersOfWaterTaken + 'lt'}"></td>
+                </tr>
+            </table>
+            <div th:if="${showTrainee.nutritionPlan == null}" >
+                <p>This user does not have a nutrition plan</p>
+            <div>
+        </div>
+    </div>
+
+    <div th:if="${currentuser.userType == 1}">
+        <button><a href="/updatetrainingplan">Update training plan</a></button>
+    </div>
+    <div th:if="${currentuser.userType == 2}">
+        <button><a href="/updatenutritionplan">Update nutrition plan</a></button>
+    </div>
+
+    <p>Sign out <a href="/">Sign out</a></p>
+</body>
+</html>
