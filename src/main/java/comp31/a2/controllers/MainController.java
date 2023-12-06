@@ -31,34 +31,36 @@ public class MainController {
     public MainController(UserService userService) {
         this.userService = userService;
     }
-
-    @GetMapping("/")
-    public String getRoot(Model model)
-    {
-        String returnpage = "";
-        if(currentUser == null)
-        {
-            List<UserEntity> userList = userService.findAllUsers();
-            Integer listrange = userList.size();
-            Random rand = new Random(); 
-            Integer upperbound = listrange;
-            int int_random = rand.nextInt(upperbound);
-            currentUser = userList.get(int_random);
-        }
-        switch (currentUser.getUserType()) {
-            case 0:
-                returnpage = "traineepage";
-            break;
-            case 1:
-                returnpage = "trainerFunctions/trainerpage" ;
-            break;
-            default:
-                returnpage = "nutritionistFunctions/nutritionistpage";
-            break;
-        }    
-        model.addAttribute("currentuser", currentUser);
-        return returnpage;
+    public String getRoot() {
+        return "index";
     }
+    // @GetMapping("/")
+    // public String getRoot(Model model)
+    // {
+    //     String returnpage = "";
+    //     if(currentUser == null)
+    //     {
+    //         List<UserEntity> userList = userService.findAllUsers();
+    //         Integer listrange = userList.size();
+    //         Random rand = new Random(); 
+    //         Integer upperbound = listrange;
+    //         int int_random = rand.nextInt(upperbound);
+    //         currentUser = userList.get(int_random);
+    //     }
+    //     switch (currentUser.getUserType()) {
+    //         case 0:
+    //             returnpage = "traineepage";
+    //         break;
+    //         case 1:
+    //             returnpage = "trainerFunctions/trainerpage" ;
+    //         break;
+    //         default:
+    //             returnpage = "nutritionistFunctions/nutritionistpage";
+    //         break;
+    //     }    
+    //     model.addAttribute("currentuser", currentUser);
+    //     return returnpage;
+    // }
     //Made by Nelson
     @GetMapping("/createnutritionplan")
     public String createNutritionPlan(Model model)
@@ -76,9 +78,6 @@ public class MainController {
         model.addAttribute("newNutritionplan", nutritionPlan);
         return "nutritionistFunctions/createnutritionplan";
     }
-    // public String getRoot() {
-    //     return "index";
-    // }
     //Made by Nelson
     @PostMapping("/add-nutrition-plan")
     public String addNutritionPlan(NutritionPlan nutritionPlan, Model model)
@@ -158,6 +157,38 @@ public class MainController {
         return returnPage;
     }
 
+    @GetMapping("/showstats")
+    public String showTraineeStats(Model model, @RequestParam Integer chosenTrainee) {
+        String pageTitle = "";
+        Integer userType = currentUser.getUserType();
+        Trainer trainer = new Trainer();
+        Nutritionist nutritionist = new Nutritionist();
+        List<Trainee> traineeList = new ArrayList<Trainee>();
+        Trainee showTrainee = userService.findTraineeById(chosenTrainee);
+        switch (userType) {
+            case 1:
+                trainer = currentUser.getTrainer();
+                traineeList = trainer.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                pageTitle = "Trainer";
+                break;
+            case 2:
+                nutritionist = currentUser.getNutritionist();
+                traineeList = nutritionist.getTrainees();
+                model.addAttribute("traineeList",traineeList);
+                pageTitle = "Nutritionist";
+                break; 
+            default:
+                pageTitle = "Trainee";
+            break;  
+        }
+        model.addAttribute("showTrainee", showTrainee);
+        model.addAttribute("show", true);
+        model.addAttribute("currentuser", currentUser);
+        model.addAttribute("title", pageTitle);
+        return "showtraineesstats";
+    }
+
     //Made by Abdellah
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -194,8 +225,6 @@ public class MainController {
         model.addAttribute("users", users);
         return "findUsersByFirstName";
     }
-
-
 
 
     @GetMapping({"/usercase1","/showUsers"})
