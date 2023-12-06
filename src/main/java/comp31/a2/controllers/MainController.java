@@ -212,7 +212,8 @@ public class MainController {
             userService.saveTrainee(newtrainee);
             break;
             case 1 : 
-            Trainer newtrainer = new Trainer(savedUser);
+    
+            Trainer newtrainer = new Trainer(savedUser,true);
             userService.saveTrainer(newtrainer);
             break;
             default:
@@ -229,8 +230,7 @@ public class MainController {
         model.addAttribute("users", users);
         return "findUsersByFirstName";
     }
-
-
+    //Made by Abdellah
     @GetMapping({"/usercase1","/showUsers"})
     public String showAllUsers(Model model) {
         List<UserEntity> users = userService.findAllUsers();
@@ -238,9 +238,11 @@ public class MainController {
         return "showAllUsers";
     }
 
-    @GetMapping("/usecase2")
-    public String showAllTrainers(Model model) {
+    // @GetMapping("/usecase2")
+    // public String showAllTrainers(Model model) {
+    // }
 
+    //Made by Joel
     @GetMapping("/uc1")
     public String getUseCase1(Model model) {
 
@@ -258,10 +260,9 @@ public class MainController {
 
         // System.out.println(userService.findAllUsers());
 
-
         return "usecase1";
     }
-
+     //Made by Joel
     // @GetMapping({ "/startNewTrainingSession", "/showSession" }) 
     @GetMapping("/startNewTrainingSession") 
     public String startNewTrainingSession(Model model) {
@@ -273,7 +274,7 @@ public class MainController {
         model.addAttribute("newTrainingSession", newTrainingSession);
         return "startNewTrainingSession";
     }
-
+    //Made by Joel
     @PostMapping("/startNewTrainingSession")
     public String handleNewTrainingSession(NewTrainingSession newTrainingSession) {    
     Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error handling here.
@@ -290,7 +291,7 @@ public class MainController {
     //newTrainingSession.setTrainee_session(currentUser.getTrainee());
     return "redirect:/showSession";
     }
-
+    //Made by Joel
     @GetMapping("/showSession") 
     public String showNewTrainingSession(Model model) {
         // Fetch the UserEntity object for the current user

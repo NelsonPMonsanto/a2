@@ -1,7 +1,6 @@
 package comp31.a2.services;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -23,41 +22,27 @@ import comp31.a2.model.repositories.UserEntityRepo;
 @Service
 public class UserService {
     
-    NewTrainingSessionRepo newTrainingSessionRepo;
-    UserEntityRepo userRepo;
-    TrainerRepo trainerRepo;
-    TraineeRepo traineeRepo;
-    NutritionistRepo nutritionistRepo;
-    
-    public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,UserEntityRepo userRepo, 
-    NewTrainingSessionRepo newTrainingSessionRepo) {
-        this.userRepo = userRepo;
-        this.trainerRepo = trainerRepo;
-        this.traineeRepo = traineeRepo;
-        this.nutritionistRepo = nutritionistRepo;
-        this.newTrainingSessionRepo = newTrainingSessionRepo;
-    }
-    public List<Nutritionist> findAllNutritionist()
-    {
-       return nutritionistRepo.findAll();
-    }
+   
    UserEntityRepo userRepo;
    TrainerRepo trainerRepo;
    TraineeRepo traineeRepo;
    NutritionistRepo nutritionistRepo;
    TrainingPlanRepo trainingPlanRepo;
    NutritionPlanRepo nutritionPlanRepo;
-   
+   NewTrainingSessionRepo newTrainingSessionRepo;
+
    public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,UserEntityRepo userRepo, 
-   TrainingPlanRepo trainingPlanRepo,NutritionPlanRepo nutritionPlanRepo) {
+   TrainingPlanRepo trainingPlanRepo,NutritionPlanRepo nutritionPlanRepo,NewTrainingSessionRepo newTrainingSessionRepo) {
       this.userRepo = userRepo;
       this.trainerRepo = trainerRepo;
       this.traineeRepo = traineeRepo;
       this.nutritionistRepo = nutritionistRepo;
       this.trainingPlanRepo = trainingPlanRepo;
       this.nutritionPlanRepo = nutritionPlanRepo;
-
+      this.newTrainingSessionRepo = newTrainingSessionRepo;
    }
+
+
    public List<Nutritionist> findAllNutritionist()
    {
       return nutritionistRepo.findAll();
@@ -144,11 +129,6 @@ public class UserService {
       return userRepo.findAll();
    }
 
-   // public UserEntity findByFirstName(String name)
-   // {
-   //    return userRepo.findByFirstName(name);
-   // }
-
    public List<UserEntity> findUsersByUserType(Integer type)
    {
       return userRepo.findByUserType(type);
@@ -185,9 +165,38 @@ public class UserService {
       }
      return null;
    }
-
    public void saveNewTrainingSession(NewTrainingSession newTrainingSession) 
    {
       newTrainingSessionRepo.save(newTrainingSession);
    }
+
+   public void saveUser( UserEntity userEntity)
+   {
+      userRepo.save(userEntity);
+   }
+
+   public void saveTrainer(Trainer trainer)
+   {
+      trainerRepo.save(trainer);
+   }
+   public void saveTrainee(Trainee trainee)
+   {
+      traineeRepo.save(trainee);
+   }
+   public void saveNutritionist(Nutritionist nutritionist)
+   {
+      nutritionistRepo.save(nutritionist);
+   }
+
+   public UserEntity findByUsername (String username)
+   {
+      return userRepo.findByUsername(username);
+   }
+
+
+
+
+
+
+
 }

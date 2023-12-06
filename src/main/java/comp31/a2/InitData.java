@@ -5,12 +5,12 @@ package comp31.a2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import comp31.a2.model.entities.NutritionPlan;
+// import comp31.a2.model.entities.NutritionPlan;
 import comp31.a2.model.entities.Nutritionist;
 //import comp31.a2.model.entities.NewTrainingSession;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
-import comp31.a2.model.entities.TrainingPlan;
+// import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
 import comp31.a2.model.repositories.NutritionPlanRepo;
 //import comp31.a2.model.repositories.NewTrainingSessionRepo;
