@@ -11,11 +11,19 @@ public interface UserEntityRepo extends CrudRepository<UserEntity,Integer>{
     
     public List<UserEntity> findAll();
 
-    public UserEntity findByFirstName(String Name);
+    public List<UserEntity> findByFirstName(String name);
+
+    public UserEntity findByUsername(String firstName);
 
     public List<UserEntity> findByUserType(Integer type);
-
+    
 }
+
+    // public UserEntity findByFirstName(String Name);
+
+
+
+// }
 
 // SELECT * FROM USER_ENTITY 
 // join TRAINEE 

@@ -108,7 +108,6 @@ public class UserService {
    {
       List<Trainee> trainees = traineeRepo.findAll();
          
-      // ;
       for (Trainee trainee : trainees) {
          
          if (trainee.getId() == id)
@@ -124,10 +123,10 @@ public class UserService {
       return userRepo.findAll();
    }
 
-   public UserEntity findByFirstName(String name)
-   {
-      return userRepo.findByFirstName(name);
-   }
+   // public UserEntity findByFirstName(String name)
+   // {
+   //    return userRepo.findByFirstName(name);
+   // }
 
    public List<UserEntity> findUsersByUserType(Integer type)
    {
@@ -143,4 +142,33 @@ public class UserService {
    {
       nutritionPlanRepo.save(nutritionPlan);
    }
+    public List<UserEntity> findUsersByFirstName(String name)
+    {
+       return userRepo.findByFirstName(name);
+    }
+
+    public void saveUser( UserEntity userEntity)
+    {
+        userRepo.save(userEntity);
+    }
+
+    public void saveTrainer(Trainer trainer)
+    {
+        trainerRepo.save(trainer);
+    }
+     public void saveTrainee(Trainee trainee)
+    {
+        traineeRepo.save(trainee);
+    }
+      public void saveNutritionist(Nutritionist nutritionist)
+    {
+        nutritionistRepo.save(nutritionist);
+    }
+
+    public UserEntity findByUsername (String username)
+    {
+        return userRepo.findByUsername(username);
+    }
+
+
 }
