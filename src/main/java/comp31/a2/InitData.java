@@ -5,17 +5,20 @@ package comp31.a2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import comp31.a2.model.entities.NutritionPlan;
 import comp31.a2.model.entities.Nutritionist;
 //import comp31.a2.model.entities.NewTrainingSession;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
+import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
+import comp31.a2.model.repositories.NutritionPlanRepo;
 //import comp31.a2.model.repositories.NewTrainingSessionRepo;
 import comp31.a2.model.repositories.NutritionistRepo;
 import comp31.a2.model.repositories.TraineeRepo;
 import comp31.a2.model.repositories.TrainerRepo;
+import comp31.a2.model.repositories.TrainingPlanRepo;
 import comp31.a2.model.repositories.UserEntityRepo;
-
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -24,12 +27,16 @@ public class InitData implements CommandLineRunner {
     TrainerRepo trainerRepo;
     NutritionistRepo nutritionistRepo;
     TraineeRepo traineeRepo;
+    NutritionPlanRepo nutritionPlanRepo;
+    TrainingPlanRepo trainingPlanRepo;
 
-    public InitData(TrainerRepo trainerRepo, NutritionistRepo nutritionistRepo, TraineeRepo traineeRepo,UserEntityRepo userRepo) {
+    public InitData(TrainerRepo trainerRepo, NutritionistRepo nutritionistRepo, TraineeRepo traineeRepo,UserEntityRepo userRepo,NutritionPlanRepo nutritionPlanRepo,TrainingPlanRepo trainingPlanRepo) {
         this.userRepo = userRepo;
         this.trainerRepo = trainerRepo;
         this.nutritionistRepo = nutritionistRepo;
         this.traineeRepo = traineeRepo;
+        this.nutritionPlanRepo = nutritionPlanRepo;
+        this.trainingPlanRepo = trainingPlanRepo;
     }
 
     @Override
@@ -110,15 +117,11 @@ public class InitData implements CommandLineRunner {
         traineeRepo.save(trainee5);  
         traineeRepo.save(trainee6);  
         traineeRepo.save(trainee7);  
-        
-       /*  NewTrainingSession newTrainingSession = new NewTrainingSession(trainee, trainer1, LocalDateTime.now(),
-        LocalDateTime.now().plusHours(1));
-        NewTrainingSessionRepo.save(newTrainingSession);
-        */
-        // traineeRepo.save(new Trainee("felix","Felix","Roger","qwer2",null,trainer1));
 
+        // NutritionPlan nutritionPlan1 = new NutritionPlan("Lose weight", "Carbohydrates", "Protein",10,20, trainee1);
+        // nutritionPlanRepo.save(nutritionPlan1);
 
-
+        // TrainingPlan trainingPlan1 = new TrainingPlan("Get muscle",  "Chest",  "squats", 30, 50, trainee1);
+        // trainingPlanRepo.save(trainingPlan1);
     }
-
 }
