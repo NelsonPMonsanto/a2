@@ -10,7 +10,7 @@
     <h2 th:text="${currentuser.username}"></h2>
 
     <h2>Choose the trainee to see their statistics</h2>
-    <form action="/showstats" class="p-5">
+    <form action="/checkstatsoftrainee" class="p-5">
         <label for="trainee" class="form-label">Trainees</label>
         <br>
         <select th:name="chosenTrainee">
