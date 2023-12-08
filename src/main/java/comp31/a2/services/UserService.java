@@ -31,7 +31,9 @@ public class UserService {
    public List<Nutritionist> findAllNutritionist() {
       return nutritionistRepo.findAll();
    }
-
+public Trainee findTraineeById(Integer id) {
+    return traineeRepo.findTraineeById(id);
+}
     public  List<Trainer> findAllTrainers()
     {
        return trainerRepo.findAll();

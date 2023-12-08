@@ -140,7 +140,7 @@ public class MainController {
     }
     @PostMapping("/assignNewMentor")
     public String assignNewMentors(Integer selectedNutritionist , Integer selectedTrainer) {
-        Trainee trainee = traineeRepo.findTraineeById(7);
+        Trainee trainee = userService.findTraineeById(7);
         Nutritionist newNutritionist ;
         Trainer newTrainer ;
         System.out.println("================Selected Nutritionist:    "+selectedNutritionist);
