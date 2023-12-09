@@ -220,7 +220,6 @@ public class MainController {
                 userService.saveTrainee(newtrainee);
                 break;
             case 1:
-
                 Trainer newtrainer = new Trainer(savedUser, true);
                 userService.saveTrainer(newtrainer);
                 break;
@@ -289,19 +288,10 @@ public class MainController {
     // Made by Joel
     @PostMapping("/startNewTrainingSession")
     public String handleNewTrainingSession(NewTrainingSession newTrainingSession) {
-        Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error
-                                                                      // handling here.
+        Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error // handling here.                                                       
         newTrainingSession.setTrainer_session(trainer);
         newTrainingSession.setTrainee_session(currentUser.getTrainee());
-
         userService.saveNewTrainingSession(newTrainingSession);
-
-        List<UserEntity> something = userService.findAllUsers();
-        currentUser = something.get(12);
-
-        // Link the trainer to the new training session
-        // newTrainingSession.setTrainer_session(trainer);
-        // newTrainingSession.setTrainee_session(currentUser.getTrainee());
         return "redirect:/showSession";
     }
 
