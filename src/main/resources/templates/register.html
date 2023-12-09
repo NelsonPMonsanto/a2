@@ -29,10 +29,14 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" th:field="*{password}" required>
         <br>
-
-        <label for="type">User Type::</label>
-        <input type="text" id="userType" name="userType" th:field="*{userType}" required>
-        <br>
+        <div>
+            <label for="type">User Type:</label>
+            <select class="form-control" id="userType" name="userType" th:field="*{userType}" required>
+                <option th:text="Trainee" th:value=0></option>
+                <option th:text="Trainer" th:value=1></option>
+                <option th:text="nutritionist" th:value=2></option>
+            </select>
+        </div>
     </div>
         <button type="submit">Register</button>
     
