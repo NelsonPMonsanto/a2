@@ -195,7 +195,33 @@ public class UserService {
 
 
 
+   public Trainer findTrainerWithLeastTrainees(List<Trainer> trainers) {
+      Trainer trainerWithLeastTrainees = null;
+      int minTrainees = Integer.MAX_VALUE;
 
+      for (Trainer trainer : trainers) {
+         int traineeCount = trainer.getTrainees().size();
+         if (traineeCount < minTrainees) {
+            minTrainees = traineeCount;
+            trainerWithLeastTrainees = trainer;
+         }
+      }
+      return trainerWithLeastTrainees;
+   }
+
+   public Nutritionist findNutritionistWithLeastClients(List<Nutritionist> nutritionists) {
+      Nutritionist nutritionistWithLeastClients = null;
+      int minClients = Integer.MAX_VALUE;
+
+      for (Nutritionist nutritionist : nutritionists) {
+          int clientCount = nutritionist.getTrainees().size();
+          if (clientCount < minClients) {
+              minClients = clientCount;
+              nutritionistWithLeastClients = nutritionist;
+          }
+      }
+      return nutritionistWithLeastClients;
+  }
 
 
 
