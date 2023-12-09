@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
+
 <body>
     <table>
-        <tr> 
+        <tr>
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Trainees</th>
         </tr>
-        <tr th:each="nutritionist:${nutritionists}"> 
+        <tr th:each="nutritionist:${nutritionists}">
             <td th:text="${nutritionist.user_nutritionist.username}"></td>
             <td th:text="${nutritionist.user_nutritionist.firstName}"></td>
             <td th:text="${nutritionist.user_nutritionist.lastName}"></td>
+            <td>
+                <div th:each="trainee:${nutritionist.trainees}">
+                    <p th:text="${trainee.user_trainee.firstName} + ' ' + ${trainee.user_trainee.id}"></p>
+                </div>
+            </td>
         </tr>
     </table>
 
     <button><a href="/">Home</a></button>
 </body>
+
 </html>

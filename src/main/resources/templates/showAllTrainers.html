@@ -17,6 +17,11 @@
             <td th:text="${trainer.user_trainer.username}"></td>
             <td th:text="${trainer.user_trainer.firstName}"></td>
             <td th:text="${trainer.user_trainer.lastName}"></td>
+            <td>
+                <div th:each="trainee:${trainer.trainees}">
+                    <p th:text="${trainee.user_trainee.firstName} + ' ' + ${trainee.user_trainee.id}"></p>
+                </div>
+            </td>
         </tr>
     </table>
 
