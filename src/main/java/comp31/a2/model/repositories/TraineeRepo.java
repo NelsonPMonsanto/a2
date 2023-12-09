@@ -9,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface TraineeRepo extends CrudRepository<Trainee,Integer>{
     
     public List<Trainee> findAll();
-    public Trainee findTraineeById(Integer id);
+    public Trainee findTraineeById(Integer id); //Remove later
 }
