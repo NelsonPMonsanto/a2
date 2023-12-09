@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <!-- You can link to your CSS stylesheets here if needed -->
+</head>
+<body>
+
+    <h2>User Details</h2>
+    <div th:if="${user != null}">
+        <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+        <p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
+        <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
+        <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>        
+    </div>
+        <p>No user details available.</p>
+</body>
+</html>

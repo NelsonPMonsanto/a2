@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Training plan</title>
+</head>
+<body>
+    <h1>Trainer page</h1>
+    <h2 th:text="${currentuser.username}"></h2>
+
+    <h2>Create training plan</h2>
+    <form action="/add-training-plan" method="post">
+        <div class="col-6" th:object="${newtrainingplan}">
+
+            <div>
+                <label>Trainees</label>
+                <select class="form-control" id="planAdd" th:field="*{traineeId}">
+                    <option th:each="trainee:${noPlanTrainees}" th:text="${trainee.user_trainee.firstName}" th:value="${trainee.id}"></option>
+                </select>
+            </div>
+            <div>
+                <label>Training Goal</label>
+                <input type="text" name="goal" th:field="*{goal}">
+            </div>
+            <div>
+                <label>Excercise to prioritize</label>
+                <input type="text" name="musclePriority" th:field="*{musclePriority}">
+            </div>
+
+            <div>
+                <label>Excercise to avoid</label>
+                <input type="text" name="excercisetoavoid" th:field="*{excercisetoavoid}">
+            </div>
+        </div>
+        <button>Submit</button>
+    </form>
+
+</body>
+</html>

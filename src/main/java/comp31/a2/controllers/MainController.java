@@ -3,12 +3,17 @@ package comp31.a2.controllers;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import comp31.a2.model.entities.NutritionPlan;
+import comp31.a2.model.entities.NewTrainingSession;
 import comp31.a2.model.entities.Nutritionist;
 import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
+import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
 import comp31.a2.model.repositories.TraineeRepo;
 import comp31.a2.model.repositories.UserEntityRepo;
@@ -16,9 +21,11 @@ import comp31.a2.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import org.springframework.ui.Model;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class MainController {
@@ -307,6 +314,4 @@ public class MainController {
         model.addAttribute("user", currentUser);
         return "showTrainingSession";
     }
-
-
 }
