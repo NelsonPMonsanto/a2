@@ -32,11 +32,13 @@
                 </span>
             </td>
             <td th:if="${user.userType == 0}">
-                <span th:text="${user.trainee.trainer.user_trainer.firstName}+ ', '"></span>
-                <span th:text="${user.trainee.nutritionist.user_nutritionist.firstName}"></span>
+                <span th:if="${user.trainee.trainer != null}">
+                    <span th:text="${user.trainee.trainer.user_trainer.firstName}+ ', '"></span>
+                </span>
+                <span th:if="${user.trainee.nutritionist != null}">
+                    <span th:text="${user.trainee.nutritionist.user_nutritionist.firstName}"></span>
+                </span>
             </td>
-            <td th:if="${user.userType == 0}"></td>
-            <td th:if="${user.userType == 1 or user.userType == 2}"></td>
             <td th:if="${user.userType == 1}">
                 <div th:each="trainee: ${user.trainer.trainees}">
                     <p th:text="${trainee.user_trainee.firstName}"></p>

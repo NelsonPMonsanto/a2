@@ -210,7 +210,6 @@ public class MainController {
         switch (userEntity.getUserType()) {
             case 0:
                 Trainee newtrainee = new Trainee(null, null, savedUser);
-                userService.saveTrainee(newtrainee);
                 //Made by nick
                 List<Trainer> trainers = userService.findAllTrainers();
                 List<Nutritionist> nutritionist = userService.findAllNutritionist();

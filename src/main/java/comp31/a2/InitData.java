@@ -41,8 +41,6 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", 0);
         UserEntity userEntity1 = new UserEntity("paul", "Paul", "Roger", "qwer1", 1);
         UserEntity userEntity5 = new UserEntity("lucas", "Lucas", "Smith", "qwer5", 1);
         UserEntity userEntity8 = new UserEntity("oliver", "Oliver", "Brown", "qwer8", 1);
@@ -87,7 +85,7 @@ public class InitData implements CommandLineRunner {
         nutritionistRepo.save(nutritionist4);
         nutritionistRepo.save(nutritionist5);
 
-        UserEntity userEntity22 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", 0);
+        UserEntity userEntity2 = new UserEntity("pablo", "Pablo", "Roger", "qwer2", 0);
         UserEntity userEntity4 = new UserEntity("emma", "Emma", "Thompson", "qwer4", 0);
         UserEntity userEntity7 = new UserEntity("sophie", "Sophie", "Williams", "qwer7", 0);
         UserEntity userEntity10 = new UserEntity("noah", "Noah", "Garcia", "qwer10", 0);
@@ -95,7 +93,7 @@ public class InitData implements CommandLineRunner {
         UserEntity userEntity16 = new UserEntity("logan", "Logan", "Patel", "qwer16", 0);
         UserEntity userEntity17 = new UserEntity("hannah", "Hannah", "Wilson", "qwer17", 0);
 
-        userRepo.save(userEntity22);
+        userRepo.save(userEntity2);
         userRepo.save(userEntity4);
         userRepo.save(userEntity7);
         userRepo.save(userEntity10);
