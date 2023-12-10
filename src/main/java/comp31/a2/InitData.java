@@ -63,7 +63,7 @@ public class InitData implements CommandLineRunner {
         trainerRepo.save(trainer4);
         trainerRepo.save(trainer5);
 
-        UserEntity userEntity3 = new UserEntity("raul", "Saul", "Danmation", "qwer3", 2);
+        UserEntity userEntity3 = new UserEntity("saul", "Saul", "Danmation", "qwer3", 2);
         UserEntity userEntity6 = new UserEntity("mia", "Mia", "Johnson", "qwer6", 2);
         UserEntity userEntity9 = new UserEntity("ava", "Ava", "Martinez", "qwer9", 2);
         UserEntity userEntity12 = new UserEntity("liam", "Liam", "Lopez", "qwer12", 2);
