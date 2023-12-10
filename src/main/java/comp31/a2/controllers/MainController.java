@@ -38,10 +38,45 @@ public class MainController {
         this.userService = userService;
     }
 
-    public String getRoot() {
-        return "index";
-    }
+    // public String getRoot() {
 
+    //     return "index";
+    // }
+    @GetMapping("/")
+    String getRoot(Model model) {
+        logger.info("---- At root.");
+        UserEntity loginUser = new UserEntity();
+        model.addAttribute("loginUser", loginUser);
+        return "login-form";
+    }
+    
+    @PostMapping("/login")
+    public String getForm(UserEntity theUser, Model model) {
+        logger.info("---- At /login.");
+        logger.info("---- " + theUser.toString());
+        UserEntity loginUser = userService.findByUsername(theUser.getUsername());
+        String returnPage;
+        if (loginUser == null || !loginUser.getPassword().equals(theUser.getPassword())) {
+            UserEntity secondTryUser = new UserEntity();
+            model.addAttribute("loginUser", secondTryUser);
+            returnPage = "login-form";
+        } else {
+            currentUser= loginUser;
+            switch (loginUser.getUserType()) {
+                case 0:
+                    returnPage = "traineepage";
+                    break;
+                case 1:
+                    returnPage = "trainerFunctions/trainerpage";
+                    break;
+                default:
+                    returnPage = "nutritionistFunctions/nutritionistpage";
+                    break;
+            }
+            model.addAttribute("currentuser", currentUser);
+        }
+        return returnPage;
+    }
     // @GetMapping("/")
     // public String getRoot(Model model)
     // {
@@ -303,4 +338,13 @@ public class MainController {
         model.addAttribute("user", currentUser);
         return "showTrainingSession";
     }
+    
+
+
+
+
+
+
+
+
 }
