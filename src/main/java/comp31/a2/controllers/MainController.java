@@ -1,10 +1,7 @@
 package comp31.a2.controllers;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,51 +12,41 @@ import comp31.a2.model.entities.Trainee;
 import comp31.a2.model.entities.Trainer;
 import comp31.a2.model.entities.TrainingPlan;
 import comp31.a2.model.entities.UserEntity;
-import comp31.a2.model.repositories.TraineeRepo;
-import comp31.a2.model.repositories.UserEntityRepo;
 import comp31.a2.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.ui.Model;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 public class MainController {
 
     UserService userService;
-    Logger logger = LoggerFactory.getLogger(MainController.class);
     UserEntity currentUser;
 
     public MainController(UserService userService) {
         this.userService = userService;
     }
-
-    // public String getRoot() {
-
-    //     return "index";
-    // }
-    @GetMapping("/")
+    //Build by Nick Elioppulos
+    @GetMapping({"/", "/loginretry"})
     String getRoot(Model model) {
-        logger.info("---- At root.");
         UserEntity loginUser = new UserEntity();
         model.addAttribute("loginUser", loginUser);
         return "login-form";
     }
-    
+
+    //getForm 
+    // Validates the Log In form data. If data is valid User can Log in if not returns to log in page
+    //Build by Nick Elioppulos
     @PostMapping("/login")
     public String getForm(UserEntity theUser, Model model) {
-        logger.info("---- At /login.");
-        logger.info("---- " + theUser.toString());
         UserEntity loginUser = userService.findByUsername(theUser.getUsername());
         String returnPage;
         if (loginUser == null || !loginUser.getPassword().equals(theUser.getPassword())) {
             UserEntity secondTryUser = new UserEntity();
             model.addAttribute("loginUser", secondTryUser);
-            returnPage = "login-form";
+            returnPage = "redirect:/loginretry";
         } else {
             currentUser= loginUser;
             switch (loginUser.getUserType()) {
@@ -77,34 +64,9 @@ public class MainController {
         }
         return returnPage;
     }
-    // @GetMapping("/")
-    // public String getRoot(Model model)
-    // {
-    // String returnpage = "";
-    // if(currentUser == null)
-    // {
-    // List<UserEntity> userList = userService.findAllUsers();
-    // Integer listrange = userList.size();
-    // Random rand = new Random();
-    // Integer upperbound = listrange;
-    // int int_random = rand.nextInt(upperbound);
-    // currentUser = userList.get(int_random);
-    // }
-    // switch (currentUser.getUserType()) {
-    // case 0:
-    // returnpage = "traineepage";
-    // break;
-    // case 1:
-    // returnpage = "trainerFunctions/trainerpage" ;
-    // break;
-    // default:
-    // returnpage = "nutritionistFunctions/nutritionistpage";
-    // break;
-    // }
-    // model.addAttribute("currentuser", currentUser);
-    // return returnpage;
-    // }
-    // Made by Nelson
+    //createNutritionPlan 
+    // Shows user(Nutritionist) to create nutrition plan form
+    // Made by Nelson Perez
     @GetMapping("/createnutritionplan")
     public String createNutritionPlan(Model model) {
         Nutritionist nutritionist = currentUser.getNutritionist();
@@ -119,8 +81,10 @@ public class MainController {
         model.addAttribute("newNutritionplan", nutritionPlan);
         return "nutritionistFunctions/createnutritionplan";
     }
-
-    // Made by Nelson
+    
+    // addNutritionPlan
+    // Create Nutrition Plan base on form data
+    // Made by Nelson Perez
     @PostMapping("/add-nutrition-plan")
     public String addNutritionPlan(NutritionPlan nutritionPlan, Model model) {
         Trainee trainee = userService.findTraineeById(nutritionPlan.getTraineeId());
@@ -132,7 +96,9 @@ public class MainController {
         return "nutritionistFunctions/nutritionistpage";
     }
 
-    // Made by Nelson
+    // createTrainingPlan 
+    // Shows user(Trainer) to create training plan form
+    // Made by Nelson Perez
     @GetMapping("/createtrainingplan")
     public String createTrainingPlan(Model model) {
         Trainer trainer = currentUser.getTrainer();
@@ -148,7 +114,9 @@ public class MainController {
         return "trainerFunctions/createtrainingplan";
     }
 
-    // Made by Nelson
+    // addTrainingPlan
+    // Create Training Plan base on form data
+    // Made by Nelson Perez
     @PostMapping("/add-training-plan")
     public String addTrainingPlan(TrainingPlan trainingPlan, Model model) {
         Trainee trainee = userService.findTraineeById(trainingPlan.getTraineeId());
@@ -160,7 +128,10 @@ public class MainController {
         return "trainerFunctions/trainerpage";
     }
 
-    // Made by Nelson
+    // checktraineestats
+    // Show Mentors the stats of their asigned trainees 
+    // or show Trainee their own personal stats
+    // Made by Nelson Perez
     @GetMapping("/checkstatsoftrainee")
     public String checktraineestats(Model model) {
         String returnPage = "checkpersonalstats";
@@ -245,7 +216,8 @@ public class MainController {
         switch (userEntity.getUserType()) {
             case 0:
                 Trainee newtrainee = new Trainee(null, null, savedUser);
-                //Made by nick
+                //Made by nick 
+                // Assign Mentors to new Trainees
                 List<Trainer> trainers = userService.findAllTrainers();
                 List<Nutritionist> nutritionist = userService.findAllNutritionist();
                 Nutritionist nutritionistWLeastClients = userService.findNutritionistWithLeastClients(nutritionist);
@@ -275,40 +247,13 @@ public class MainController {
     }
 
     // Made by Abdellah
-    @GetMapping({ "/usercase1", "/showUsers" })
+    @GetMapping({ "/showallUsers", "/showUsers" })
     public String showAllUsers(Model model) {
         List<UserEntity> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "showAllUsers";
     }
-
-    // @GetMapping("/usecase2")
-    // public String showAllTrainers(Model model) {
-    // }
-
     // Made by Joel
-    @GetMapping("/uc1")
-    public String getUseCase1(Model model) {
-
-        List<Trainer> trainers = userService.findAllTrainers();
-        model.addAttribute("trainers", trainers);
-
-        List<Trainee> trainees = userService.findAllTrainees();
-        model.addAttribute("trainees", trainees);
-
-        List<UserEntity> users = userService.findAllUsers();
-        // logger.info("here", users.size());
-        model.addAttribute("users", users);
-
-        currentUser = userService.findUserById(12);
-
-        // System.out.println(userService.findAllUsers());
-
-        return "usecase1";
-    }
-
-    // Made by Joel
-    // @GetMapping({ "/startNewTrainingSession", "/showSession" })
     @GetMapping("/startNewTrainingSession")
     public String startNewTrainingSession(Model model) {
         // Fetch the UserEntity object for the current user
