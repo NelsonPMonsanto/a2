@@ -170,7 +170,7 @@ public class MainController {
     @GetMapping("/assignNewMentor")
     public String assignedNewMentor(Model model)
     {
-        Trainee trainee = traineeRepo.findTraineeById(7);
+        Trainee trainee = userService.findTraineeById(7);
         model.addAttribute("trainee", trainee);
         model.addAttribute("nutritionists", userService.findAllNutritionist());
         model.addAttribute("trainers", userService.findAllTrainers());
