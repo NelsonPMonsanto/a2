@@ -1,5 +1,6 @@
 package comp31.a2.controllers;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 @Controller
 public class MainController {
@@ -36,7 +40,7 @@ public class MainController {
         return "login-form";
     }
 
-    //getForm 
+    //getForm
     // Validates the Log In form data. If data is valid User can Log in if not returns to log in page
     //Build by Nick Elioppulos
     @PostMapping("/login")
@@ -64,7 +68,7 @@ public class MainController {
         }
         return returnPage;
     }
-    //createNutritionPlan 
+    //createNutritionPlan
     // Shows user(Nutritionist) to create nutrition plan form
     // Made by Nelson Perez
     @GetMapping("/createnutritionplan")
@@ -81,7 +85,7 @@ public class MainController {
         model.addAttribute("newNutritionplan", nutritionPlan);
         return "nutritionistFunctions/createnutritionplan";
     }
-    
+
     // addNutritionPlan
     // Create Nutrition Plan base on form data
     // Made by Nelson Perez
@@ -96,7 +100,7 @@ public class MainController {
         return "nutritionistFunctions/nutritionistpage";
     }
 
-    // createTrainingPlan 
+    // createTrainingPlan
     // Shows user(Trainer) to create training plan form
     // Made by Nelson Perez
     @GetMapping("/createtrainingplan")
@@ -129,7 +133,7 @@ public class MainController {
     }
 
     // checktraineestats
-    // Show Mentors the stats of their asigned trainees 
+    // Show Mentors the stats of their asigned trainees
     // or show Trainee their own personal stats
     // Made by Nelson Perez
     @GetMapping("/checkstatsoftrainee")
@@ -199,6 +203,73 @@ public class MainController {
         model.addAttribute("title", pageTitle);
         return "showtraineesstats";
     }
+    @GetMapping({"/usecase7"})
+    public String assignNewMentor(Model model) {
+        //TODO
+          Trainee trainee = currentUser.getTrainee();
+        List<Trainer> trainers = userService.findAllTrainers();
+        List<Nutritionist> nutritionists = userService.findAllNutritionist();
+
+
+
+        //TODO
+
+        model.addAttribute("trainee", trainee);
+
+        model.addAttribute("nutritionists", nutritionists);
+
+        model.addAttribute("trainers", trainers);
+
+
+        return "assignNewMentor";
+    }
+
+    @PostMapping("/assignNewMentor")
+    public String assignNewMentors(Integer selectedNutritionist , Integer selectedTrainer) {
+        Trainee trainee = userService.findTraineeById(7);
+        Nutritionist newNutritionist ;
+        Trainer newTrainer ;
+        System.out.println("================Selected Nutritionist:    "+selectedNutritionist);
+        System.out.println("================Selected Trainer:    "+selectedTrainer);
+        // Check if selectedNutritionist is not null and find the corresponding Nutritionist
+
+        if (selectedNutritionist != null) {
+            newNutritionist = userService.findNutritionistById(selectedNutritionist);
+            trainee.setNutritionist(newNutritionist);
+        }
+
+        // Check if selectedTrainer is not null and find the corresponding Trainer
+        if (selectedTrainer != null) {
+            newTrainer = userService.findTrainerById(selectedTrainer);
+            // System.out.println("================new treinaer id    "+newTrainer.getId());
+            trainee.setTrainer(newTrainer);
+        }
+
+        // Set the Nutritionist and Trainer for the Trainee
+       /* if (trainee.getNutritionist() != null) {
+            System.out.println("=================================="+trainee.getNutritionist());
+        }*/
+        //TODO
+/*
+        traineeRepo.save(trainee);
+*/
+
+        return "redirect:/assignNewMentor";
+    }
+    @GetMapping("/assignNewMentor")
+    public String assignedNewMentor(Model model)
+    {
+        Trainee trainee = currentUser.getTrainee();
+        model.addAttribute("trainee", trainee);
+        model.addAttribute("nutritionists", userService.findAllNutritionist());
+        model.addAttribute("trainers", userService.findAllTrainers());
+
+        /*
+        System.out.println("=================================="+trainee.getTrainer());
+*/
+        return "assignNewMentor";
+    }
+
 
     // Made by Abdellah
     @GetMapping("/register")
@@ -216,7 +287,7 @@ public class MainController {
         switch (userEntity.getUserType()) {
             case 0:
                 Trainee newtrainee = new Trainee(null, null, savedUser);
-                //Made by nick 
+                //Made by nick
                 // Assign Mentors to new Trainees
                 List<Trainer> trainers = userService.findAllTrainers();
                 List<Nutritionist> nutritionist = userService.findAllNutritionist();
@@ -245,7 +316,6 @@ public class MainController {
         model.addAttribute("users", users);
         return "findUsersByFirstName";
     }
-
     // Made by Abdellah
     @GetMapping({ "/showallUsers", "/showUsers" })
     public String showAllUsers(Model model) {
@@ -264,11 +334,10 @@ public class MainController {
         model.addAttribute("newTrainingSession", newTrainingSession);
         return "startNewTrainingSession";
     }
-
     // Made by Joel
     @PostMapping("/startNewTrainingSession")
     public String handleNewTrainingSession(NewTrainingSession newTrainingSession) {
-        Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error // handling here.                                                       
+        Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error // handling here.
         newTrainingSession.setTrainer_session(trainer);
         newTrainingSession.setTrainee_session(currentUser.getTrainee());
         userService.saveNewTrainingSession(newTrainingSession);
@@ -283,7 +352,7 @@ public class MainController {
         model.addAttribute("user", currentUser);
         return "showTrainingSession";
     }
-    
+
 
 
 
