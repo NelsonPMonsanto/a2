@@ -2,7 +2,7 @@ package comp31.a2.model.entities;
 
 import java.util.List;
 
-// import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,12 +29,22 @@ public class Trainer {
     @OneToMany(mappedBy = "trainer")
     List<Trainee> trainees;
     @OneToOne()
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "trr_user_id")
     UserEntity user_trainer;
+    @Column(name = "is_available") //NOV26
+    Boolean isAvailable; //NOV26
+    @OneToOne(mappedBy = "trainer_session")
+    NewTrainingSession newTrainingSession;
 
-
-    public Trainer(UserEntity user_trainer) {
+    public Trainer(UserEntity user_trainer, Boolean isAvailable) {
         this.user_trainer = user_trainer;
+        this.isAvailable = isAvailable;
+    }
+
+
+    public List<Trainee> getTrainees()
+    {
+        return this.trainees;
     }
 
 

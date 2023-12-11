@@ -4,61 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <title>Document</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/styles.css}">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            margin: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        button a {
-            color: #fff;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 
 <body>
@@ -83,11 +32,13 @@
                 </span>
             </td>
             <td th:if="${user.userType == 0}">
-                <span th:text="${user.trainee.trainer.user_trainer.firstName}+ ', '"></span>
-                <span th:text="${user.trainee.nutritionist.user_nutritionist.firstName}"></span>
+                <span th:if="${user.trainee.trainer != null}">
+                    <span th:text="${user.trainee.trainer.user_trainer.firstName}+ ', '"></span>
+                </span>
+                <span th:if="${user.trainee.nutritionist != null}">
+                    <span th:text="${user.trainee.nutritionist.user_nutritionist.firstName}"></span>
+                </span>
             </td>
-            <td th:if="${user.userType == 0}"></td>
-            <td th:if="${user.userType == 1 or user.userType == 2}"></td>
             <td th:if="${user.userType == 1}">
                 <div th:each="trainee: ${user.trainer.trainees}">
                     <p th:text="${trainee.user_trainee.firstName}"></p>
@@ -99,9 +50,12 @@
                 </div>
             </td>
         </tr>
-    </table>
 
+    </table>
+    <br>
     <button><a href="/">Home</a></button>
+    </br>
+
 </body>
 
-</html>
+</html><link rel="stylesheet" type="text/css" href="/styles.css">

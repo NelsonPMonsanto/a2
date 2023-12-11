@@ -12,4 +12,5 @@ public interface TrainerRepo extends CrudRepository<Trainer,Integer> {
     public List<Trainer> findAll();
 
 
+    public List<Trainer> findByIsAvailableTrue(); //NOV26 JOEL
 }

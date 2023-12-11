@@ -28,6 +28,7 @@ public class UserEntity {
 
     @OneToOne(mappedBy = "user_nutritionist")
     Nutritionist nutritionist;
+
     public UserEntity(String username, String firstName, String lastName, String password, Integer userType) {
         this.username = username;
         this.firstName = firstName;
@@ -35,11 +36,6 @@ public class UserEntity {
         this.password = password;
         this.userType = userType;
     }
-
-
-
-
-
     
 }
 
