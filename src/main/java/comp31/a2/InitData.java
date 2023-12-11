@@ -118,10 +118,5 @@ public class InitData implements CommandLineRunner {
         traineeRepo.save(trainee6);  
         traineeRepo.save(trainee7);  
 
-        // NutritionPlan nutritionPlan1 = new NutritionPlan("Lose weight", "Carbohydrates", "Protein",10,20, trainee1);
-        // nutritionPlanRepo.save(nutritionPlan1);
-
-        // TrainingPlan trainingPlan1 = new TrainingPlan("Get muscle",  "Chest",  "squats", 30, 50, trainee1);
-        // trainingPlanRepo.save(trainingPlan1);
     }
 }

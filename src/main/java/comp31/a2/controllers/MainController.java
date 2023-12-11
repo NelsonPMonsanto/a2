@@ -1,11 +1,9 @@
 package comp31.a2.controllers;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import comp31.a2.model.entities.NutritionPlan;
 import comp31.a2.model.entities.NewTrainingSession;
 import comp31.a2.model.entities.Nutritionist;
@@ -19,10 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
-
 @Controller
 public class MainController {
 
@@ -32,17 +26,37 @@ public class MainController {
     public MainController(UserService userService) {
         this.userService = userService;
     }
-    //Build by Nick Elioppulos
     @GetMapping({"/", "/loginretry"})
     String getRoot(Model model) {
-        UserEntity loginUser = new UserEntity();
-        model.addAttribute("loginUser", loginUser);
-        return "login-form";
+
+        String returnPage = "login-form";
+
+        if(currentUser == null)
+        {
+            UserEntity loginUser = new UserEntity();
+            model.addAttribute("loginUser", loginUser);
+        }
+        else
+        {
+            switch (currentUser.getUserType()) {
+                case 0:
+                    returnPage = "traineepage";
+                    break;
+                case 1:
+                    returnPage = "trainerFunctions/trainerpage";
+                    break;
+                default:
+                    returnPage = "nutritionistFunctions/nutritionistpage";
+                    break;
+            }
+            model.addAttribute("currentuser", currentUser);
+        }
+
+        return returnPage;
     }
 
     //getForm
     // Validates the Log In form data. If data is valid User can Log in if not returns to log in page
-    //Build by Nick Elioppulos
     @PostMapping("/login")
     public String getForm(UserEntity theUser, Model model) {
         UserEntity loginUser = userService.findByUsername(theUser.getUsername());
@@ -70,7 +84,6 @@ public class MainController {
     }
     //createNutritionPlan
     // Shows user(Nutritionist) to create nutrition plan form
-    // Made by Nelson Perez
     @GetMapping("/createnutritionplan")
     public String createNutritionPlan(Model model) {
         Nutritionist nutritionist = currentUser.getNutritionist();
@@ -88,7 +101,6 @@ public class MainController {
 
     // addNutritionPlan
     // Create Nutrition Plan base on form data
-    // Made by Nelson Perez
     @PostMapping("/add-nutrition-plan")
     public String addNutritionPlan(NutritionPlan nutritionPlan, Model model) {
         Trainee trainee = userService.findTraineeById(nutritionPlan.getTraineeId());
@@ -102,7 +114,6 @@ public class MainController {
 
     // createTrainingPlan
     // Shows user(Trainer) to create training plan form
-    // Made by Nelson Perez
     @GetMapping("/createtrainingplan")
     public String createTrainingPlan(Model model) {
         Trainer trainer = currentUser.getTrainer();
@@ -120,7 +131,6 @@ public class MainController {
 
     // addTrainingPlan
     // Create Training Plan base on form data
-    // Made by Nelson Perez
     @PostMapping("/add-training-plan")
     public String addTrainingPlan(TrainingPlan trainingPlan, Model model) {
         Trainee trainee = userService.findTraineeById(trainingPlan.getTraineeId());
@@ -135,7 +145,6 @@ public class MainController {
     // checktraineestats
     // Show Mentors the stats of their asigned trainees
     // or show Trainee their own personal stats
-    // Made by Nelson Perez
     @GetMapping("/checkstatsoftrainee")
     public String checktraineestats(Model model) {
         String returnPage = "checkpersonalstats";
@@ -205,22 +214,12 @@ public class MainController {
     }
     @GetMapping({"/usecase7"})
     public String assignNewMentor(Model model) {
-        //TODO
-          Trainee trainee = currentUser.getTrainee();
+        Trainee trainee = currentUser.getTrainee();
         List<Trainer> trainers = userService.findAllTrainers();
         List<Nutritionist> nutritionists = userService.findAllNutritionist();
-
-
-
-        //TODO
-
         model.addAttribute("trainee", trainee);
-
         model.addAttribute("nutritionists", nutritionists);
-
         model.addAttribute("trainers", trainers);
-
-
         return "assignNewMentor";
     }
 
@@ -244,16 +243,6 @@ public class MainController {
             // System.out.println("================new treinaer id    "+newTrainer.getId());
             trainee.setTrainer(newTrainer);
         }
-
-        // Set the Nutritionist and Trainer for the Trainee
-       /* if (trainee.getNutritionist() != null) {
-            System.out.println("=================================="+trainee.getNutritionist());
-        }*/
-        //TODO
-/*
-        traineeRepo.save(trainee);
-*/
-
         return "redirect:/assignNewMentor";
     }
     @GetMapping("/assignNewMentor")
@@ -263,22 +252,13 @@ public class MainController {
         model.addAttribute("trainee", trainee);
         model.addAttribute("nutritionists", userService.findAllNutritionist());
         model.addAttribute("trainers", userService.findAllTrainers());
-
-        /*
-        System.out.println("=================================="+trainee.getTrainer());
-*/
         return "assignNewMentor";
     }
-
-
-    // Made by Abdellah
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("userEntity", new UserEntity());
         return "register";
     }
-
-    // Made by Abdellah
     @PostMapping("/register")
     public String registerUser(UserEntity userEntity) {
         userService.saveUser(userEntity);
@@ -287,8 +267,6 @@ public class MainController {
         switch (userEntity.getUserType()) {
             case 0:
                 Trainee newtrainee = new Trainee(null, null, savedUser);
-                //Made by nick
-                // Assign Mentors to new Trainees
                 List<Trainer> trainers = userService.findAllTrainers();
                 List<Nutritionist> nutritionist = userService.findAllNutritionist();
                 Nutritionist nutritionistWLeastClients = userService.findNutritionistWithLeastClients(nutritionist);
@@ -308,44 +286,47 @@ public class MainController {
         }
         return "redirect:/showUsers";
     }
-
-    // Made by Abdellah
     @GetMapping("/user-details")
     public String showUserDetails(Model model) {
         List<UserEntity> users = userService.findUsersByFirstName("Paul");
         model.addAttribute("users", users);
         return "findUsersByFirstName";
     }
-    // Made by Abdellah
     @GetMapping({ "/showallUsers", "/showUsers" })
     public String showAllUsers(Model model) {
         List<UserEntity> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "showAllUsers";
     }
-    // Made by Joel
     @GetMapping("/startNewTrainingSession")
     public String startNewTrainingSession(Model model) {
-        // Fetch the UserEntity object for the current user
-        // Create a new NewTrainingSession object and link it to the user
         NewTrainingSession newTrainingSession = new NewTrainingSession();
-        List<UserEntity> something = userService.findAllUsers();
-        currentUser = something.get(12);
         model.addAttribute("newTrainingSession", newTrainingSession);
+
+        if(currentUser.getTrainee().getNewTrainingSession() != null)
+        {
+            model.addAttribute("showForm", false);
+        } 
+        else
+        {
+            model.addAttribute("showForm", true);
+        }
+
+
         return "startNewTrainingSession";
     }
-    // Made by Joel
     @PostMapping("/startNewTrainingSession")
-    public String handleNewTrainingSession(NewTrainingSession newTrainingSession) {
-        Trainer trainer = userService.findAvailableTrainers().get(0); // This is just an example. You should add error // handling here.
+    public String handleNewTrainingSession(NewTrainingSession newTrainingSession,Model model) {
+        Trainee currentTrainee = currentUser.getTrainee();
+        Trainer trainer = userService.findAvailableTrainers().get(0);
         newTrainingSession.setTrainer_session(trainer);
-        newTrainingSession.setTrainee_session(currentUser.getTrainee());
+        newTrainingSession.setTrainee_session(currentTrainee);
         userService.saveNewTrainingSession(newTrainingSession);
-        return "redirect:/showSession";
+        currentUser = userService.findUserById(currentUser.getId());
+        return "redirect:/sessionAdded";
     }
 
-    // Made by Joel
-    @GetMapping("/showSession")
+    @GetMapping({"/showSession", "/sessionAdded"})
     public String showNewTrainingSession(Model model) {
         // Fetch the UserEntity object for the current user
         // Create a new NewTrainingSession object and link it to the user
@@ -353,12 +334,10 @@ public class MainController {
         return "showTrainingSession";
     }
 
-
-
-
-
-
-
-
+    @GetMapping("/signOut")
+    public String signOutUser() {
+        currentUser = null;
+        return "redirect:/loginretry";
+    }
 
 }

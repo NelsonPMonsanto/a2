@@ -1,4 +1,5 @@
 package comp31.a2.services;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,6 @@ import comp31.a2.model.repositories.UserEntityRepo;
 @Service
 public class UserService {
 
-
    UserEntityRepo userRepo;
    TrainerRepo trainerRepo;
    TraineeRepo traineeRepo;
@@ -31,8 +31,10 @@ public class UserService {
    NutritionPlanRepo nutritionPlanRepo;
    NewTrainingSessionRepo newTrainingSessionRepo;
 
-   public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,UserEntityRepo userRepo,
-   TrainingPlanRepo trainingPlanRepo,NutritionPlanRepo nutritionPlanRepo,NewTrainingSessionRepo newTrainingSessionRepo) {
+   public UserService(TrainerRepo trainerRepo, TraineeRepo traineeRepo, NutritionistRepo nutritionistRepo,
+         UserEntityRepo userRepo,
+         TrainingPlanRepo trainingPlanRepo, NutritionPlanRepo nutritionPlanRepo,
+         NewTrainingSessionRepo newTrainingSessionRepo) {
       this.userRepo = userRepo;
       this.trainerRepo = trainerRepo;
       this.traineeRepo = traineeRepo;
@@ -42,177 +44,125 @@ public class UserService {
       this.newTrainingSessionRepo = newTrainingSessionRepo;
    }
 
-
-   public List<Nutritionist> findAllNutritionist()
-   {
+   public List<Nutritionist> findAllNutritionist() {
       return nutritionistRepo.findAll();
    }
-public Trainee findTraineeById(Integer id) {
-    return traineeRepo.findTraineeById(id);
-}
-    public  List<Trainer> findAllTrainers()
-    {
-       return trainerRepo.findAll();
-    }
 
-   public List<Trainee> getTraineesWithTrainingPLan(List<Trainee> trainees)
-   {
-      List<Trainee> newList = new ArrayList<Trainee>();
-      for (Trainee trainee : trainees) {
-
-         if(trainee.getTrainingPlan() != null)
-         {
-            newList.add(trainee);
-         }
-      }
-      return newList;
+   public Trainee findTraineeById(Integer id) {
+      return traineeRepo.findTraineeById(id);
    }
 
-   public List<Trainee> getTraineesWithoutTrainingPLan(List<Trainee> trainees)
-   {
-      List<Trainee> newList = new ArrayList<Trainee>();
-      for (Trainee trainee : trainees) {
-
-         if(trainee.getTrainingPlan() == null)
-         {
-            newList.add(trainee);
-         }
-      }
-      return newList;
-   }
-
-/*
-   public List<Trainer> findAllTrainers()
-   {
+   public List<Trainer> findAllTrainers() {
       return trainerRepo.findAll();
    }
-*/
 
-    public List<Trainee> findAllTrainees()    {
-       return traineeRepo.findAll();
-    }
-    
-    public List<UserEntity> findAllUsers()
-    {
-       return userRepo.findAll();
-    }
-   public List<Trainee> getTraineesWithNutritionPLan(List<Trainee> trainees)
-   {
+   public List<Trainee> getTraineesWithTrainingPLan(List<Trainee> trainees) {
       List<Trainee> newList = new ArrayList<Trainee>();
       for (Trainee trainee : trainees) {
 
-         if(trainee.getNutritionPlan() != null)
-         {
+         if (trainee.getTrainingPlan() != null) {
             newList.add(trainee);
          }
       }
       return newList;
    }
 
-   public List<Trainee> getTraineesWithoutNutritionPLan(List<Trainee> trainees)
-   {
+   public List<Trainee> getTraineesWithoutTrainingPLan(List<Trainee> trainees) {
       List<Trainee> newList = new ArrayList<Trainee>();
       for (Trainee trainee : trainees) {
 
-         if(trainee.getNutritionPlan() == null)
-         {
+         if (trainee.getTrainingPlan() == null) {
             newList.add(trainee);
          }
       }
       return newList;
    }
 
- /*  public List<Trainee> findAllTrainees()
-   {
+   public List<Trainee> findAllTrainees() {
       return traineeRepo.findAll();
    }
 
-   public Trainee findTraineeById(Integer id)
-   {
-      List<Trainee> trainees = traineeRepo.findAll();
-
-      for (Trainee trainee : trainees) {
-
-         if (trainee.getId() == id)
-         {
-            return trainee;
-         }
-      }
-     return null;
-   }
-*/
-/*
-   public List<UserEntity> findAllUsers()
-   {
+   public List<UserEntity> findAllUsers() {
       return userRepo.findAll();
    }
-*/
 
-   public List<UserEntity> findUsersByUserType(Integer type)
-   {
+   public List<Trainee> getTraineesWithNutritionPLan(List<Trainee> trainees) {
+      List<Trainee> newList = new ArrayList<Trainee>();
+      for (Trainee trainee : trainees) {
+
+         if (trainee.getNutritionPlan() != null) {
+            newList.add(trainee);
+         }
+      }
+      return newList;
+   }
+
+   public List<Trainee> getTraineesWithoutNutritionPLan(List<Trainee> trainees) {
+      List<Trainee> newList = new ArrayList<Trainee>();
+      for (Trainee trainee : trainees) {
+
+         if (trainee.getNutritionPlan() == null) {
+            newList.add(trainee);
+         }
+      }
+      return newList;
+   }
+
+   public List<UserEntity> findUsersByUserType(Integer type) {
       return userRepo.findByUserType(type);
    }
 
-   public void addTrainingPlan(TrainingPlan trainingPlan)
-   {
+   public void addTrainingPlan(TrainingPlan trainingPlan) {
       trainingPlanRepo.save(trainingPlan);
    }
 
-   public void addNutritionPlan(NutritionPlan nutritionPlan)
-   {
+   public void addNutritionPlan(NutritionPlan nutritionPlan) {
       nutritionPlanRepo.save(nutritionPlan);
    }
-    public List<UserEntity> findUsersByFirstName(String name)
-    {
-       return userRepo.findByFirstName(name);
-    }
 
-    public List<Trainer> findAvailableTrainers() //NOV26
-    {
-      return trainerRepo.findByIsAvailableTrue();
-    }
+   public List<UserEntity> findUsersByFirstName(String name) {
+      return userRepo.findByFirstName(name);
+   }
 
-    public UserEntity findUserById(Integer id)
+   public List<Trainer> findAvailableTrainers() // NOV26
    {
+      return trainerRepo.findByIsAvailableTrue();
+   }
+
+   public UserEntity findUserById(Integer id) {
       List<UserEntity> users = userRepo.findAll();
       // ;
       for (UserEntity user : users) {
-         if (user.getId() == id)
-         {
+         if (user.getId() == id) {
             return user;
          }
       }
-     return null;
+      return null;
    }
-   public void saveNewTrainingSession(NewTrainingSession newTrainingSession)
-   {
+
+   public void saveNewTrainingSession(NewTrainingSession newTrainingSession) {
       newTrainingSessionRepo.save(newTrainingSession);
    }
 
-   public void saveUser( UserEntity userEntity)
-   {
+   public void saveUser(UserEntity userEntity) {
       userRepo.save(userEntity);
    }
 
-   public void saveTrainer(Trainer trainer)
-   {
+   public void saveTrainer(Trainer trainer) {
       trainerRepo.save(trainer);
    }
-   public void saveTrainee(Trainee trainee)
-   {
+
+   public void saveTrainee(Trainee trainee) {
       traineeRepo.save(trainee);
    }
-   public void saveNutritionist(Nutritionist nutritionist)
-   {
+
+   public void saveNutritionist(Nutritionist nutritionist) {
       nutritionistRepo.save(nutritionist);
    }
 
-   public UserEntity findByUsername (String username)
-   {
+   public UserEntity findByUsername(String username) {
       return userRepo.findByUsername(username);
    }
-
-
 
    public Trainer findTrainerWithLeastTrainees(List<Trainer> trainers) {
       Trainer trainerWithLeastTrainees = null;
@@ -234,39 +184,39 @@ public Trainee findTraineeById(Integer id) {
       int minClients = Integer.MAX_VALUE;
 
       for (Nutritionist nutritionist : nutritionists) {
-          int clientCount = nutritionist.getTrainees().size();
-          if (clientCount < minClients) {
-              minClients = clientCount;
-              nutritionistWithLeastClients = nutritionist;
-          }
+         int clientCount = nutritionist.getTrainees().size();
+         if (clientCount < minClients) {
+            minClients = clientCount;
+            nutritionistWithLeastClients = nutritionist;
+         }
       }
 
       return nutritionistWithLeastClients;
-  }
+   }
 
+   public Nutritionist findNutritionistById(Integer Id) {
 
-  public Nutritionist findNutritionistById(Integer Id) {
+      List<Nutritionist> nutritionists = nutritionistRepo.findAll();
+      Nutritionist newNutritionist = null;
 
-     List<Nutritionist> nutritionists = nutritionistRepo.findAll();
-     Nutritionist newNutritionist=null;
+      for (Nutritionist nutritionist : nutritionists) {
+         if (nutritionist.getId() == Id) {
+            newNutritionist = nutritionist;
+            break;
+         }
+      }
+      return newNutritionist;
+   }
 
-     for (Nutritionist nutritionist : nutritionists) {
-        if(nutritionist.getId() == Id){
-           newNutritionist=nutritionist;
-           break;
-        }
-     }
-     return newNutritionist;
-  }
    public Trainer findTrainerById(Integer Id) {
       List<Trainer> trainers = trainerRepo.findAll();
 
-      Trainer newTrainer=null;
-        for (Trainer trainer : trainers) {
-             if(trainer.getId()==Id){
-                newTrainer=trainer;
-             }
-        }
+      Trainer newTrainer = null;
+      for (Trainer trainer : trainers) {
+         if (trainer.getId() == Id) {
+            newTrainer = trainer;
+         }
+      }
       return newTrainer;
    }
 }

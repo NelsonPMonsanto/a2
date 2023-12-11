@@ -8,31 +8,23 @@
 <body>
     <h1>Start New Training Session</h1>
 
-    <!-- Form for requesting a new training session -->
-    <form action="/startNewTrainingSession" method="post">
-        <div th:object="${newTrainingSession}"> 
-        <label for="startTime">Start Time:</label><br>
-        <input type="datetime-local" id="startTime" name="startTime" th:field="*{startTime}"><br>
-        <label for="endTime">End Time:</label><br>
-        <input type="datetime-local" id="endTime" name="endTime" th:field="*{endTime}"><br>
+    <div th:if="${showForm}==true">
+        <form action="/startNewTrainingSession" method="post">
+            <div th:object="${newTrainingSession}"> 
+            <label for="startTime">Start Time:</label><br>
+            <input type="datetime-local" id="startTime" name="startTime" th:field="*{startTime}"><br>
+            <label for="endTime">End Time:</label><br>
+            <input type="datetime-local" id="endTime" name="endTime" th:field="*{endTime}"><br>
+        </div>
+            <input type="submit" value="Request Training Session"> 
+        </form>
     </div>
-        <input type="submit" value="Request Training Session"> 
-    </form>
 
-    <!-- Table for displaying the details of the training session -->
-    <!-- <table>
-        <tr>
-            <th>User</th>
-            <th>Trainer</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-        </tr>
-        <tr>
-            <td th:text="${user.username}"></td>
-            <td th:text="${trainer.user_trainer.username}"></td>
-            <td th:text="${newTrainingSession.startTime}"></td>
-            <td th:text="${newTrainingSession.endTime}"></td>
-        </tr>
-    </table> -->
+    <div th:if="${showForm}==false">
+        <p>You are currently in a session user currently in a session</p>
+        <button><a href="/">Home</a></button>
+    </div>
+
+
 </body>
 </html>
