@@ -81,10 +81,12 @@ public Trainee findTraineeById(Integer id) {
       return newList;
    }
 
+/*
    public List<Trainer> findAllTrainers()
    {
       return trainerRepo.findAll();
    }
+*/
 
     public List<Trainee> findAllTrainees()    {
        return traineeRepo.findAll();
@@ -120,7 +122,7 @@ public Trainee findTraineeById(Integer id) {
       return newList;
    }
 
-   public List<Trainee> findAllTrainees()
+ /*  public List<Trainee> findAllTrainees()
    {
       return traineeRepo.findAll();
    }
@@ -138,11 +140,13 @@ public Trainee findTraineeById(Integer id) {
       }
      return null;
    }
-
+*/
+/*
    public List<UserEntity> findAllUsers()
    {
       return userRepo.findAll();
    }
+*/
 
    public List<UserEntity> findUsersByUserType(Integer type)
    {

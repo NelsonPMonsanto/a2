@@ -205,17 +205,16 @@ public class MainController {
     }
     @GetMapping({"/usecase7"})
     public String assignNewMentor(Model model) {
-        Trainee trainee = traineeRepo.findTraineeById(6);
+        //TODO
+          Trainee trainee = currentUser.getTrainee();
         List<Trainer> trainers = userService.findAllTrainers();
         List<Nutritionist> nutritionists = userService.findAllNutritionist();
 
 
+
+        //TODO
+
         model.addAttribute("trainee", trainee);
-        UserEntity userEntity17 = new UserEntity("sijan", "Sijan", "Udas", "qwer17", 0);
-        userRepo.save(userEntity17);
-        Trainee trainee7 = new Trainee(null, null, userEntity17);
-        traineeRepo.save(trainee7);
-        model.addAttribute("trainee", trainee7);
 
         model.addAttribute("nutritionists", nutritionists);
 
@@ -224,6 +223,54 @@ public class MainController {
 
         return "assignNewMentor";
     }
+
+    @PostMapping("/assignNewMentor")
+    public String assignNewMentors(Integer selectedNutritionist , Integer selectedTrainer) {
+        Trainee trainee = userService.findTraineeById(7);
+        Nutritionist newNutritionist ;
+        Trainer newTrainer ;
+        System.out.println("================Selected Nutritionist:    "+selectedNutritionist);
+        System.out.println("================Selected Trainer:    "+selectedTrainer);
+        // Check if selectedNutritionist is not null and find the corresponding Nutritionist
+
+        if (selectedNutritionist != null) {
+            newNutritionist = userService.findNutritionistById(selectedNutritionist);
+            trainee.setNutritionist(newNutritionist);
+        }
+
+        // Check if selectedTrainer is not null and find the corresponding Trainer
+        if (selectedTrainer != null) {
+            newTrainer = userService.findTrainerById(selectedTrainer);
+            // System.out.println("================new treinaer id    "+newTrainer.getId());
+            trainee.setTrainer(newTrainer);
+        }
+
+        // Set the Nutritionist and Trainer for the Trainee
+       /* if (trainee.getNutritionist() != null) {
+            System.out.println("=================================="+trainee.getNutritionist());
+        }*/
+        //TODO
+/*
+        traineeRepo.save(trainee);
+*/
+
+        return "redirect:/assignNewMentor";
+    }
+    @GetMapping("/assignNewMentor")
+    public String assignedNewMentor(Model model)
+    {
+        Trainee trainee = currentUser.getTrainee();
+        model.addAttribute("trainee", trainee);
+        model.addAttribute("nutritionists", userService.findAllNutritionist());
+        model.addAttribute("trainers", userService.findAllTrainers());
+
+        /*
+        System.out.println("=================================="+trainee.getTrainer());
+*/
+        return "assignNewMentor";
+    }
+
+
     // Made by Abdellah
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -295,50 +342,7 @@ public class MainController {
         newTrainingSession.setTrainee_session(currentUser.getTrainee());
         userService.saveNewTrainingSession(newTrainingSession);
         return "redirect:/showSession";
-        }
-    @PostMapping("/assignNewMentor")
-    public String assignNewMentors(Integer selectedNutritionist , Integer selectedTrainer) {
-        Trainee trainee = userService.findTraineeById(7);
-        Nutritionist newNutritionist ;
-        Trainer newTrainer ;
-        System.out.println("================Selected Nutritionist:    "+selectedNutritionist);
-        System.out.println("================Selected Trainer:    "+selectedTrainer);
-        // Check if selectedNutritionist is not null and find the corresponding Nutritionist
-
-        if (selectedNutritionist != null) {
-            newNutritionist = userService.findNutritionistById(selectedNutritionist);
-            trainee.setNutritionist(newNutritionist);
-        }
-
-        // Check if selectedTrainer is not null and find the corresponding Trainer
-        if (selectedTrainer != null) {
-            newTrainer = userService.findTrainerById(selectedTrainer);
-            // System.out.println("================new treinaer id    "+newTrainer.getId());
-            trainee.setTrainer(newTrainer);
-        }
-
-        // Set the Nutritionist and Trainer for the Trainee
-       /* if (trainee.getNutritionist() != null) {
-            System.out.println("=================================="+trainee.getNutritionist());
-        }*/
-        traineeRepo.save(trainee);
-
-        return "redirect:/assignNewMentor";
     }
-    @GetMapping("/assignNewMentor")
-    public String assignedNewMentor(Model model)
-    {
-        Trainee trainee = userService.findTraineeById(7);
-        model.addAttribute("trainee", trainee);
-        model.addAttribute("nutritionists", userService.findAllNutritionist());
-        model.addAttribute("trainers", userService.findAllTrainers());
-
-        /*
-        System.out.println("=================================="+trainee.getTrainer());
-*/
-        return "assignNewMentor";
-    }
-
 
     // Made by Joel
     @GetMapping("/showSession")

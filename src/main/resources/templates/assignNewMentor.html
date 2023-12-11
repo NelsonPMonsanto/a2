@@ -106,12 +106,12 @@
         <th>Nutritionist Name</th>
     </tr>
     <tr>
-        <td th:text="${trainee.user_trainee.id}"></td>
-        <td th:text="${trainee.user_trainee.username}"></td>
-        <td th:text="${trainee.user_trainee.firstName}"></td>
-        <td th:text="${trainee.user_trainee.lastName}"></td>
-       <td th:text="${trainee.trainer.user_trainer.firstName}"></td>
-        <td th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>
+        <td th:if="${trainee.user_trainee.id != null}" th:text="${trainee.user_trainee.id}"></td>
+        <td th:if="${trainee.user_trainee.username != null}" th:text="${trainee.user_trainee.username}"></td>
+        <td th:if="${trainee.user_trainee.firstName != null}" th:text="${trainee.user_trainee.firstName}"></td>
+        <td th:if="${trainee.user_trainee.lastName != null}" th:text="${trainee.user_trainee.lastName}"></td>
+        <td th:if="${trainee.trainer != null and trainee.trainer.user_trainer.firstName != null}" th:text="${trainee.trainer.user_trainer.firstName}"></td>
+        <td th:if="${trainee.nutritionist != null and trainee.nutritionist.user_nutritionist.firstName != null}" th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>
     </tr>
 </table>
 
