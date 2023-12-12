@@ -4,37 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <title>Assign New Mentor</title>
 </head>
 
-<body><h1>Assign New Mentor</h1>
-<form action="/assignNewMentor" method="post">
-    <div>
-        <label for="selectedNutritionist">Select Nutritionist:</label>
-        <select name="selectedNutritionist" id="selectedNutritionist">
-            <option value="">-- Select Nutritionist --</option>
-            <th:block th:each="nutritionist : ${nutritionists}">
-                <option th:value="${nutritionist.id}" th:text="${nutritionist.user_nutritionist.id}+'.  '+${nutritionist.user_nutritionist.firstName + ' ' + nutritionist.user_nutritionist.lastName}">
-                </option>
-            </th:block>
-        </select>
+<body>
+    <h1>Assign New Mentor</h1>
+    <form action="/assignNewMentor" method="post">
+        <div>
+            <label for="selectedNutritionist">Select Nutritionist:</label>
+            <select name="selectedNutritionist" id="selectedNutritionist">
+                <option value="">-- Select Nutritionist --</option>
+                <th:block th:each="nutritionist : ${nutritionists}">
+                    <option th:value="${nutritionist.id}"
+                        th:text="${nutritionist.user_nutritionist.id}+'.  '+${nutritionist.user_nutritionist.firstName + ' ' + nutritionist.user_nutritionist.lastName}">
+                    </option>
+                </th:block>
+            </select>
 
-        <br>
+            <br>
 
-        <label for="selectedTrainer">Select Trainer:</label>
-        <select name="selectedTrainer" id="selectedTrainer">
-            <option value="">-- Select Trainer --</option>
-            <th:block th:each="trainer : ${trainers}">
-                <option th:value="${trainer.id}" th:text="${trainer.user_trainer.id}+'.  '+${trainer.user_trainer.firstName + ' ' + trainer.user_trainer.lastName}">
-                </option>
-            </th:block>
-        </select>
+            <label for="selectedTrainer">Select Trainer:</label>
+            <select name="selectedTrainer" id="selectedTrainer">
+                <option value="">-- Select Trainer --</option>
+                <th:block th:each="trainer : ${trainers}">
+                    <option th:value="${trainer.id}"
+                        th:text="${trainer.user_trainer.id}+'.  '+${trainer.user_trainer.firstName + ' ' + trainer.user_trainer.lastName}">
+                    </option>
+                </th:block>
+            </select>
 
 
-        <br>
-    </div>
-    <button type="submit">Assign New Mentor</button>
-</form>
+            <br>
+        </div>
+        <button type="submit">Assign New Mentor</button>
+    </form>
     <br>
     <br>
     <br>
@@ -42,29 +47,31 @@
     <br>
     <br>
     <br>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Trainer Name</th>
-        <th>Nutritionist Name</th>
-    </tr>
-    <tr>
-        <td th:if="${trainee.user_trainee.id != null}" th:text="${trainee.user_trainee.id}"></td>
-        <td th:if="${trainee.user_trainee.username != null}" th:text="${trainee.user_trainee.username}"></td>
-        <td th:if="${trainee.user_trainee.firstName != null}" th:text="${trainee.user_trainee.firstName}"></td>
-        <td th:if="${trainee.user_trainee.lastName != null}" th:text="${trainee.user_trainee.lastName}"></td>
-        <td th:if="${trainee.trainer != null and trainee.trainer.user_trainer.firstName != null}" th:text="${trainee.trainer.user_trainer.firstName}"></td>
-        <td th:if="${trainee.nutritionist != null and trainee.nutritionist.user_nutritionist.firstName != null}" th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Trainer Name</th>
+            <th>Nutritionist Name</th>
+        </tr>
+        <tr>
+            <td th:if="${trainee.user_trainee.id != null}" th:text="${trainee.user_trainee.id}"></td>
+            <td th:if="${trainee.user_trainee.username != null}" th:text="${trainee.user_trainee.username}"></td>
+            <td th:if="${trainee.user_trainee.firstName != null}" th:text="${trainee.user_trainee.firstName}"></td>
+            <td th:if="${trainee.user_trainee.lastName != null}" th:text="${trainee.user_trainee.lastName}"></td>
+            <td th:if="${trainee.trainer != null and trainee.trainer.user_trainer.firstName != null}"
+                th:text="${trainee.trainer.user_trainer.firstName}"></td>
+            <td th:if="${trainee.nutritionist != null and trainee.nutritionist.user_nutritionist.firstName != null}"
+                th:text="${trainee.nutritionist.user_nutritionist.firstName}"></td>
+        </tr>
+    </table>
 
 
 
 
-<button><a href="/">Home</a></button>
+    <button><a href="/">Home</a></button>
 </body>
 
 </html>

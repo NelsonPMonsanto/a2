@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class TrainingPlan {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -31,7 +31,8 @@ public class TrainingPlan {
 
     Integer traineeId;
 
-    public TrainingPlan(String goal, String musclePriority, String excercisetoavoid,Integer weight,Integer trainingHours, Trainee trainee_train_plan) {
+    public TrainingPlan(String goal, String musclePriority, String excercisetoavoid, Integer weight,
+            Integer trainingHours, Trainee trainee_train_plan) {
         this.goal = goal;
         this.musclePriority = musclePriority;
         this.excercisetoavoid = excercisetoavoid;

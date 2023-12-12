@@ -21,28 +21,13 @@ public class Nutritionist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
-    // String username;
-    // String firstName;
-    // String lastName;
-    // String password;
     @OneToMany(mappedBy = "nutritionist")
     List<Trainee> trainees;
     @OneToOne()
     @JoinColumn(name = "ntr_user_id")
     UserEntity user_nutritionist;
 
-    
-
     public Nutritionist(UserEntity user_nutritionist) {
         this.user_nutritionist = user_nutritionist;
     }
-
-    // public Nutritionist(String username, String firstName, String lastName, String password) {
-    //     this.username = username;
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.password = password;
-    // }
-
-
 }

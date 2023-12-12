@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <title>Check stats of trainees</title>
 </head>
+
 <body>
     <h1 th:text="${title} +' page'"></h1>
     <h2 th:text="${currentuser.username}"></h2>
-    
+
     <div class="right" th:if="${show}">
 
         <h3 th:text="${currentuser.firstName} + ' ' +  ${currentuser.lastName}"></h3>
-        
+
         <div>
-            <h4>Training Statistic</h4> 
+            <h4>Training Statistic</h4>
 
             <table th:if="${currentuser.trainee.trainingPlan != null}" id="all">
                 <tr>
@@ -33,39 +37,40 @@
                 </tr>
             </table>
 
-            <div th:if="${currentuser.trainee.trainingPlan == null}" >
+            <div th:if="${currentuser.trainee.trainingPlan == null}">
                 <p>This user does not have a training plan</p>
-            <div>
-        </div>
+                <div>
+                </div>
 
-        <div>
-            <h4>Nutrition Statistic</h4> 
-            <table th:if="${currentuser.trainee.nutritionPlan != null}" id="all">
-                <tr>
-                    <th>Goal</th>
-                    <th>Muscle to prioritize</th>
-                    <th>Excercise to avoid</th>
-                    <th>Current weight</th>
-                    <th>Total training hours</th>
-                </tr>
-                <tr>
-                    <td th:text="${currentuser.trainee.nutritionPlan.goal}"></td>
-                    <td th:text="${currentuser.trainee.nutritionPlan.foodToAvoid}"></td>
-                    <td th:text="${currentuser.trainee.nutritionPlan.foodToPriotize}"></td>
-                    <td th:text="${currentuser.trainee.nutritionPlan.caloriesIntake} + 'calories'"></td>
-                    <td th:text="${currentuser.trainee.nutritionPlan.litersOfWaterTaken + 'lt'}"></td>
-                </tr>
-            </table>
-            <div th:if="${currentuser.trainee.nutritionPlan == null}" >
-                <p>This user does not have a nutrition plan</p>
-            <div>
-        </div>
-    </div>
-    <div th:if="${title}=='Trainee'">
-            <form action="/assignNewMentor" method="post" >
-                <button>Assign New Mentor</button>
-            </form>
-        </div>
-    <p>Sign out <a href="/signOut">Sign out</a></p>
+                <div>
+                    <h4>Nutrition Statistic</h4>
+                    <table th:if="${currentuser.trainee.nutritionPlan != null}" id="all">
+                        <tr>
+                            <th>Goal</th>
+                            <th>Muscle to prioritize</th>
+                            <th>Excercise to avoid</th>
+                            <th>Current weight</th>
+                            <th>Total training hours</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${currentuser.trainee.nutritionPlan.goal}"></td>
+                            <td th:text="${currentuser.trainee.nutritionPlan.foodToAvoid}"></td>
+                            <td th:text="${currentuser.trainee.nutritionPlan.foodToPriotize}"></td>
+                            <td th:text="${currentuser.trainee.nutritionPlan.caloriesIntake} + 'calories'"></td>
+                            <td th:text="${currentuser.trainee.nutritionPlan.litersOfWaterTaken + 'lt'}"></td>
+                        </tr>
+                    </table>
+                    <div th:if="${currentuser.trainee.nutritionPlan == null}">
+                        <p>This user does not have a nutrition plan</p>
+                        <div>
+                        </div>
+                    </div>
+                    <div th:if="${title}=='Trainee'">
+                        <form action="/assignNewMentor" method="post">
+                            <button>Assign New Mentor</button>
+                        </form>
+                    </div>
+                    <p>Sign out <a href="/signOut">Sign out</a></p>
 </body>
+
 </html>

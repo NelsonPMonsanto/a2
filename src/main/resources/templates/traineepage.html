@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
     <title>Trainee page</title>
 </head>
+
 <body>
     <h1>Trainee page</h1>
     <h2 th:text="'Welcome ' + ${currentuser.username} +'. Your are now Log in'"></h2>
-    
+
     <button><a href="/startNewTrainingSession">Start training session</a></button>
     <button><a href="/checkstatsoftrainee">Check personal statistics</a></button>
 
 </body>
+
 </html>

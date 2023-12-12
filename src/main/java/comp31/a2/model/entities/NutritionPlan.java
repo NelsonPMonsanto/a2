@@ -13,7 +13,7 @@ import jakarta.persistence.OneToOne;
 @Data
 @NoArgsConstructor
 public class NutritionPlan {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -31,7 +31,8 @@ public class NutritionPlan {
 
     Integer traineeId;
 
-    public NutritionPlan(String goal, String foodToAvoid, String foodToPriotize,Integer caloriesIntake,Integer litersOfWaterTaken, Trainee trainee_nutri_plan) {
+    public NutritionPlan(String goal, String foodToAvoid, String foodToPriotize, Integer caloriesIntake,
+            Integer litersOfWaterTaken, Trainee trainee_nutri_plan) {
         this.goal = goal;
         this.foodToAvoid = foodToAvoid;
         this.foodToPriotize = foodToPriotize;

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <title>Create Training plan</title>
 </head>
+
 <body>
     <h1>Trainer page</h1>
     <h2 th:text="${currentuser.username}"></h2>
@@ -16,7 +19,8 @@
             <div>
                 <label>Trainees</label>
                 <select class="form-control" id="planAdd" th:field="*{traineeId}">
-                    <option th:each="trainee:${noPlanTrainees}" th:text="${trainee.user_trainee.firstName}" th:value="${trainee.id}"></option>
+                    <option th:each="trainee:${noPlanTrainees}" th:text="${trainee.user_trainee.firstName}"
+                        th:value="${trainee.id}"></option>
                 </select>
             </div>
             <div>
@@ -37,4 +41,5 @@
     </form>
 
 </body>
+
 </html>

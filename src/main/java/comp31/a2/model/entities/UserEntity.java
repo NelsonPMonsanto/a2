@@ -1,4 +1,5 @@
 package comp31.a2.model.entities;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -19,7 +20,7 @@ public class UserEntity {
     String firstName;
     String lastName;
     String password;
-    Integer userType; //0-Trainee 1-Trainer 2-Nutrtitionist
+    Integer userType; // 0-Trainee 1-Trainer 2-Nutrtitionist
     @OneToOne(mappedBy = "user_trainer")
     Trainer trainer;
 
@@ -36,6 +37,5 @@ public class UserEntity {
         this.password = password;
         this.userType = userType;
     }
-    
-}
 
+}

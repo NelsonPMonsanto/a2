@@ -17,22 +17,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Trainer {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
-
-    // String username;
-    // String firstName;
-    // String lastName;
-    // String password; 
     @OneToMany(mappedBy = "trainer")
     List<Trainee> trainees;
     @OneToOne()
     @JoinColumn(name = "trr_user_id")
     UserEntity user_trainer;
-    @Column(name = "is_available") //NOV26
-    Boolean isAvailable; //NOV26
+    @Column(name = "is_available") // NOV26
+    Boolean isAvailable; // NOV26
     @OneToOne(mappedBy = "trainer_session")
     NewTrainingSession newTrainingSession;
 
@@ -41,11 +36,8 @@ public class Trainer {
         this.isAvailable = isAvailable;
     }
 
-
-    public List<Trainee> getTrainees()
-    {
+    public List<Trainee> getTrainees() {
         return this.trainees;
     }
-
 
 }

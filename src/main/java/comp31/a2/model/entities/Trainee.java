@@ -11,20 +11,19 @@ import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 public class Trainee {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @ManyToOne
-    @JoinColumn(name="fkey_nutritionist")
+    @JoinColumn(name = "fkey_nutritionist")
     Nutritionist nutritionist;
     @ManyToOne
-    @JoinColumn(name="fkey_trainer")
+    @JoinColumn(name = "fkey_trainer")
     Trainer trainer;
     @OneToOne()
     @JoinColumn(name = "tre_user_id")
@@ -44,19 +43,4 @@ public class Trainee {
         this.trainer = trainer;
     }
 
-    
-
-    // public Trainee(String username, String firstName, String lastName, String password, Nutritionist nutritionist,
-    //         Trainer trainer) {
-    //     this.username = username;
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.password = password;
-    //     this.nutritionist = nutritionist;
-    //     this.trainer = trainer;
-    // }
-
-
-
-    
 }

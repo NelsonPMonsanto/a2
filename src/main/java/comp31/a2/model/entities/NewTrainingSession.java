@@ -15,17 +15,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class NewTrainingSession {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
     @OneToOne
-    @JoinColumn(name="trainee_id")
+    @JoinColumn(name = "trainee_id")
     Trainee trainee_session;
 
     @OneToOne
-    @JoinColumn(name="trainer_id")
+    @JoinColumn(name = "trainer_id")
     Trainer trainer_session;
 
     LocalDateTime startTime;
@@ -38,5 +38,5 @@ public class NewTrainingSession {
         this.trainer_session = trainer;
         this.startTime = startTime;
         this.endTime = endTime;
-    }  
+    }
 }

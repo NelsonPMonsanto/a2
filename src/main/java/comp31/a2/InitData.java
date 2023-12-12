@@ -30,7 +30,8 @@ public class InitData implements CommandLineRunner {
     NutritionPlanRepo nutritionPlanRepo;
     TrainingPlanRepo trainingPlanRepo;
 
-    public InitData(TrainerRepo trainerRepo, NutritionistRepo nutritionistRepo, TraineeRepo traineeRepo,UserEntityRepo userRepo,NutritionPlanRepo nutritionPlanRepo,TrainingPlanRepo trainingPlanRepo) {
+    public InitData(TrainerRepo trainerRepo, NutritionistRepo nutritionistRepo, TraineeRepo traineeRepo,
+            UserEntityRepo userRepo, NutritionPlanRepo nutritionPlanRepo, TrainingPlanRepo trainingPlanRepo) {
         this.userRepo = userRepo;
         this.trainerRepo = trainerRepo;
         this.nutritionistRepo = nutritionistRepo;
@@ -99,24 +100,25 @@ public class InitData implements CommandLineRunner {
         userRepo.save(userEntity10);
         userRepo.save(userEntity13);
         userRepo.save(userEntity16);
-        userRepo.save(userEntity17); 
-        // REMEMBER USERENTITY17 HAS NULL VALUES IT DOES NOT WORK!!! Keep it commented until workaround is build
+        userRepo.save(userEntity17);
+        // REMEMBER USERENTITY17 HAS NULL VALUES IT DOES NOT WORK!!! Keep it commented
+        // until workaround is build
 
-        Trainee trainee1 = new Trainee(nutritionist1,trainer1,userEntity2);
-        Trainee trainee2 = new Trainee(nutritionist2,trainer2,userEntity4);
-        Trainee trainee3 = new Trainee(nutritionist3,trainer3,userEntity7);
-        Trainee trainee4 = new Trainee(nutritionist3,trainer4,userEntity10);
-        Trainee trainee5 = new Trainee(nutritionist4,trainer3,userEntity13);
-        Trainee trainee6 = new Trainee(nutritionist3,trainer3,userEntity16);
-        Trainee trainee7 = new Trainee(null,null,userEntity17);
+        Trainee trainee1 = new Trainee(nutritionist1, trainer1, userEntity2);
+        Trainee trainee2 = new Trainee(nutritionist2, trainer2, userEntity4);
+        Trainee trainee3 = new Trainee(nutritionist3, trainer3, userEntity7);
+        Trainee trainee4 = new Trainee(nutritionist3, trainer4, userEntity10);
+        Trainee trainee5 = new Trainee(nutritionist4, trainer3, userEntity13);
+        Trainee trainee6 = new Trainee(nutritionist3, trainer3, userEntity16);
+        Trainee trainee7 = new Trainee(null, null, userEntity17);
 
         traineeRepo.save(trainee1);
-        traineeRepo.save(trainee2);  
-        traineeRepo.save(trainee3);  
-        traineeRepo.save(trainee4);      
-        traineeRepo.save(trainee5);  
-        traineeRepo.save(trainee6);  
-        traineeRepo.save(trainee7);  
+        traineeRepo.save(trainee2);
+        traineeRepo.save(trainee3);
+        traineeRepo.save(trainee4);
+        traineeRepo.save(trainee5);
+        traineeRepo.save(trainee6);
+        traineeRepo.save(trainee7);
 
     }
 }
