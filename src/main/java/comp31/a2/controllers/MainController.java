@@ -230,11 +230,8 @@ public class MainController {
         Trainee trainee = userService.findTraineeById(7);
         Nutritionist newNutritionist;
         Trainer newTrainer;
-        System.out.println("================Selected Nutritionist:    " + selectedNutritionist);
-        System.out.println("================Selected Trainer:    " + selectedTrainer);
         // Check if selectedNutritionist is not null and find the corresponding
         // Nutritionist
-
         if (selectedNutritionist != null) {
             newNutritionist = userService.findNutritionistById(selectedNutritionist);
             trainee.setNutritionist(newNutritionist);

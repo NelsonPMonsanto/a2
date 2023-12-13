@@ -101,8 +101,6 @@ public class InitData implements CommandLineRunner {
         userRepo.save(userEntity13);
         userRepo.save(userEntity16);
         userRepo.save(userEntity17);
-        // REMEMBER USERENTITY17 HAS NULL VALUES IT DOES NOT WORK!!! Keep it commented
-        // until workaround is build
 
         Trainee trainee1 = new Trainee(nutritionist1, trainer1, userEntity2);
         Trainee trainee2 = new Trainee(nutritionist2, trainer2, userEntity4);
